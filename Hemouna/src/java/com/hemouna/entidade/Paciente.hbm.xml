@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2013 18:18:01 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.hemouna.entidade.Paciente" table="paciente" catalog="hemounadb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sangue" class="com.hemouna.entidade.Sangue" fetch="select">
+            <column name="sangue_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hospital" class="com.hemouna.entidade.Hospital" fetch="select">
+            <column name="hospital_id" not-null="true" />
+        </many-to-one>
+        <property name="cpf" type="int">
+            <column name="cpf" not-null="true" />
+        </property>
+        <property name="nome" type="string">
+            <column name="nome" length="100" not-null="true" />
+        </property>
+        <set name="pacienteHasBolsadesangues" inverse="true">
+            <key>
+                <column name="paciente_id" not-null="true" />
+            </key>
+            <one-to-many class="com.hemouna.entidade.PacienteHasBolsadesangue" />
+        </set>
+    </class>
+</hibernate-mapping>

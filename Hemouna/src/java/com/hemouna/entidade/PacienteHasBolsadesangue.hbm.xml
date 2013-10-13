@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2013 18:18:01 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.hemouna.entidade.PacienteHasBolsadesangue" table="paciente_has_bolsadesangue" catalog="hemounadb">
+        <composite-id name="id" class="com.hemouna.entidade.PacienteHasBolsadesangueId">
+            <key-property name="pacienteId" type="int">
+                <column name="paciente_id" />
+            </key-property>
+            <key-property name="bolsadesangueId" type="int">
+                <column name="bolsadesangue_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="bolsadesangue" class="com.hemouna.entidade.Bolsadesangue" update="false" insert="false" fetch="select">
+            <column name="bolsadesangue_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paciente" class="com.hemouna.entidade.Paciente" update="false" insert="false" fetch="select">
+            <column name="paciente_id" not-null="true" />
+        </many-to-one>
+        <property name="datasaida" type="string">
+            <column name="datasaida" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

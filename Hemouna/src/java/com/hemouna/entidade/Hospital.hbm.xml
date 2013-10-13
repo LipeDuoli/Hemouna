@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2013 18:18:01 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.hemouna.entidade.Hospital" table="hospital" catalog="hemounadb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nomehosp" type="string">
+            <column name="nomehosp" length="50" not-null="true" />
+        </property>
+        <set name="pacientes" inverse="true">
+            <key>
+                <column name="hospital_id" not-null="true" />
+            </key>
+            <one-to-many class="com.hemouna.entidade.Paciente" />
+        </set>
+        <set name="bolsadesangues" inverse="true">
+            <key>
+                <column name="hospital_id" not-null="true" />
+            </key>
+            <one-to-many class="com.hemouna.entidade.Bolsadesangue" />
+        </set>
+        <set name="usuarioses" inverse="true">
+            <key>
+                <column name="hospital_id" not-null="true" />
+            </key>
+            <one-to-many class="com.hemouna.entidade.Usuarios" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2013 18:18:01 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.hemouna.entidade.Tipobolsa" table="tipobolsa" catalog="hemounadb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nomebolsa" type="string">
+            <column name="nomebolsa" length="25" not-null="true" />
+        </property>
+        <set name="bolsadesangues" inverse="true">
+            <key>
+                <column name="tipobolsa_id" not-null="true" />
+            </key>
+            <one-to-many class="com.hemouna.entidade.Bolsadesangue" />
+        </set>
+    </class>
+</hibernate-mapping>
