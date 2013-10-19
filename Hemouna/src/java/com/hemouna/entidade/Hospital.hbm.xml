@@ -11,23 +11,6 @@
         <property name="nomehosp" type="string">
             <column name="nomehosp" length="50" not-null="true" />
         </property>
-        <set name="pacientes" inverse="true">
-            <key>
-                <column name="hospital_id" not-null="true" />
-            </key>
-            <one-to-many class="com.hemouna.entidade.Paciente" />
-        </set>
-        <set name="bolsadesangues" inverse="true">
-            <key>
-                <column name="hospital_id" not-null="true" />
-            </key>
-            <one-to-many class="com.hemouna.entidade.Bolsadesangue" />
-        </set>
-        <set name="usuarioses" inverse="true">
-            <key>
-                <column name="hospital_id" not-null="true" />
-            </key>
-            <one-to-many class="com.hemouna.entidade.Usuarios" />
-        </set>
+ 
     </class>
 </hibernate-mapping>

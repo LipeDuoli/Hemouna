@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hemouna.restful;
+package com.hemouna.servico;
 
 import com.hemouna.dao.UsuariosDao;
 import com.hemouna.entidade.Usuarios;
@@ -28,14 +28,14 @@ public class RestUsuario {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cadastrarUsuario(String usuario, String senha){
+    public Response cadastrarUsuario(String usu_str){
        try {
-           Usuarios u = new Usuarios(null, usuario, senha, 0);
+           Usuarios u = new Gson().fromJson(usu_str, Usuarios.class);
            UsuariosDao uDao = new UsuariosDao();
            uDao.salvar(u);
            return Response.status(Response.Status.CREATED).build();
        } catch (Exception e) {
-           return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+           return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
        }
     }
 }

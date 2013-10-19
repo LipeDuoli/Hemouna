@@ -75,7 +75,7 @@ public class BolsaDeSangueDao implements IDao {
     }
 
     @Override
-    public Object getTarefa(Integer id) {
+    public Object getId(Integer id) {
         try{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();

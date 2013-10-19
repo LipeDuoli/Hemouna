@@ -76,7 +76,7 @@ public class HospitalDao implements IDao{
     }
 
     @Override
-    public Object getTarefa(Integer id) {
+    public Object getId(Integer id) {
         try{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -94,7 +94,7 @@ public class HospitalDao implements IDao{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = this.session.createCriteria(new Hospital().getClass());
-            criteria.add(Restrictions.like("argumento", argumento, MatchMode.EXACT));
+            criteria.add(Restrictions.like("nomehosp", argumento, MatchMode.ANYWHERE));
             return criteria.list();
         } catch (HibernateException he) {
             return null;
