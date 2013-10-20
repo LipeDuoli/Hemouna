@@ -14,7 +14,7 @@
         <many-to-one name="hospital" class="com.hemouna.entidade.Hospital" fetch="select">
             <column name="hospital_id" not-null="true" />
         </many-to-one>
-        <property name="cpf" type="int">
+        <property name="cpf" type="long">
             <column name="cpf" not-null="true" />
         </property>
         <property name="nome" type="string">

@@ -13,8 +13,6 @@ public class Sangue  implements java.io.Serializable {
 
      private Integer id;
      private String tiposangue;
-     private Set pacientes = new HashSet(0);
-     private Set bolsadesangues = new HashSet(0);
 
     public Sangue() {
     }
@@ -22,11 +20,6 @@ public class Sangue  implements java.io.Serializable {
 	
     public Sangue(String tiposangue) {
         this.tiposangue = tiposangue;
-    }
-    public Sangue(String tiposangue, Set pacientes, Set bolsadesangues) {
-       this.tiposangue = tiposangue;
-       this.pacientes = pacientes;
-       this.bolsadesangues = bolsadesangues;
     }
    
     public Integer getId() {
@@ -43,24 +36,6 @@ public class Sangue  implements java.io.Serializable {
     public void setTiposangue(String tiposangue) {
         this.tiposangue = tiposangue;
     }
-    public Set getPacientes() {
-        return this.pacientes;
-    }
-    
-    public void setPacientes(Set pacientes) {
-        this.pacientes = pacientes;
-    }
-    public Set getBolsadesangues() {
-        return this.bolsadesangues;
-    }
-    
-    public void setBolsadesangues(Set bolsadesangues) {
-        this.bolsadesangues = bolsadesangues;
-    }
-
-
-
-
 }
 
 

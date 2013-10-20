@@ -18,6 +18,7 @@ caminho: http://localhost:8080/Hemouna/api/usuario
 }
 
 
+
 Para cadastro de pacientes
 caminho: http://localhost:8080/Hemouna/api/paciente
 {

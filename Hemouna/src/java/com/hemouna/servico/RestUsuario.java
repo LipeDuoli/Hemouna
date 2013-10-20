@@ -7,8 +7,6 @@ package com.hemouna.servico;
 import com.hemouna.dao.UsuariosDao;
 import com.hemouna.entidade.Usuarios;
 import com.google.gson.Gson;
-import java.util.LinkedList;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

@@ -30,8 +30,8 @@ public class RestPaciente {
     public Response cadastrarPaciente(String paciente_str) {
         try {
             Paciente p = new Gson().fromJson(paciente_str, Paciente.class);
-            PacienteDao hDao = new PacienteDao();
-            hDao.salvar(p);
+            PacienteDao pDao = new PacienteDao();
+            pDao.salvar(p);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
