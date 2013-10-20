@@ -9,6 +9,7 @@ import com.hemouna.persistencia.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
@@ -18,20 +19,20 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Fillipe
  */
-public class UsuariosDao implements IDao{
-    
+public class UsuariosDao implements IDao {
+
     private Session session;
     private Transaction transaction;
 
     @Override
     public boolean salvar(Object obj) {
-        try{
+        try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaction = session.beginTransaction();
             this.session.save(obj);
             this.transaction.commit();
             return true;
-        } catch(HibernateException he) {
+        } catch (HibernateException he) {
             transaction.rollback();
             return false;
         } finally {
@@ -41,13 +42,13 @@ public class UsuariosDao implements IDao{
 
     @Override
     public boolean alterar(Object obj) {
-        try{
+        try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaction = session.beginTransaction();
             this.session.update(obj);
             this.transaction.commit();
             return true;
-        } catch(HibernateException he) {
+        } catch (HibernateException he) {
             transaction.rollback();
             return false;
         } finally {
@@ -57,17 +58,17 @@ public class UsuariosDao implements IDao{
 
     @Override
     public boolean excluir(Integer id) {
-        try{
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Usuarios tb = (Usuarios) session.get(new Usuarios().getClass(), id);
-            if(tb != null){
+            if (tb != null) {
                 session.delete(tb);
                 transaction.commit();
                 return true;
             }
             return false;
-        } catch (HibernateException he){
+        } catch (HibernateException he) {
             transaction.rollback();
             return false;
         } finally {
@@ -77,11 +78,11 @@ public class UsuariosDao implements IDao{
 
     @Override
     public Object getId(Integer id) {
-        try{
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             return session.get(new Usuarios().getClass(), id);
-        } catch (HibernateException he){
+        } catch (HibernateException he) {
             return null;
         } finally {
             session.close();
@@ -89,18 +90,18 @@ public class UsuariosDao implements IDao{
     }
 
     @Override
-    public List<Object> pesquisar(String argumento) {
+    public List<Object> listarTodos() {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Criteria criteria = this.session.createCriteria(new Usuarios().getClass());
-            criteria.add(Restrictions.like("argumento", argumento, MatchMode.EXACT));
-            return criteria.list();
+            String hql = "FROM Usuarios";
+            Query query = session.createQuery(hql);
+            return query.list();
         } catch (HibernateException he) {
             return null;
         } finally {
             session.close();
         }
     }
-    
+
 }

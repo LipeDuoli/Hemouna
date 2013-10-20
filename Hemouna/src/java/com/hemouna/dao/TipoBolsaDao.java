@@ -9,6 +9,7 @@ import com.hemouna.persistencia.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
@@ -89,13 +90,13 @@ public class TipoBolsaDao implements IDao{
     }
 
     @Override
-    public List<Object> pesquisar(String argumento) {
+    public List<Object> listarTodos() {
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Criteria criteria = this.session.createCriteria(new Tipobolsa().getClass());
-            criteria.add(Restrictions.like("argumento", argumento, MatchMode.EXACT));
-            return criteria.list();
+            String hql = "FROM TipoBolsa";
+            Query query = session.createQuery(hql);
+            return query.list();
         } catch (HibernateException he) {
             return null;
         } finally {

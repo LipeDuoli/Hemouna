@@ -15,5 +15,5 @@ public interface IDao {
     public boolean alterar(Object obj);
     public boolean excluir(Integer id);
     public Object getId(Integer id);
-    public List<Object>pesquisar(String argumento);
+    public List<Object>listarTodos();
 }
