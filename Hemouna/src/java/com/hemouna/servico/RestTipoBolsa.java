@@ -22,7 +22,7 @@ public class RestTipoBolsa {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listarHospitais() {
+    public Response listarTipoBolsa() {
         try {
             String json = new Gson().toJson(new TipoBolsaDao().listarTodos());
             return Response.status(Response.Status.OK).entity(json).build();

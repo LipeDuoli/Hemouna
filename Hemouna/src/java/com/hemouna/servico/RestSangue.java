@@ -22,7 +22,7 @@ public class RestSangue {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listarHospitais() {
+    public Response listarTipoSangue() {
         try {
             String json = new Gson().toJson(new SangueDao().listarTodos());
             return Response.status(Response.Status.OK).entity(json).build();
