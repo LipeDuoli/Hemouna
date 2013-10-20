@@ -9,13 +9,13 @@ public class Paciente implements java.io.Serializable {
     private Integer id;
     private Sangue sangue;
     private Hospital hospital;
-    private long cpf;
+    private String cpf;
     private String nome;
 
     public Paciente() {
     }
 
-    public Paciente(Sangue sangue, Hospital hospital, int cpf, String nome) {
+    public Paciente(Sangue sangue, Hospital hospital, String cpf, String nome) {
         this.sangue = sangue;
         this.hospital = hospital;
         this.cpf = cpf;
@@ -46,11 +46,11 @@ public class Paciente implements java.io.Serializable {
         this.hospital = hospital;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return this.cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

@@ -11,11 +11,5 @@
         <property name="nomebolsa" type="string">
             <column name="nomebolsa" length="25" not-null="true" />
         </property>
-        <set name="bolsadesangues" inverse="true">
-            <key>
-                <column name="tipobolsa_id" not-null="true" />
-            </key>
-            <one-to-many class="com.hemouna.entidade.Bolsadesangue" />
-        </set>
     </class>
 </hibernate-mapping>

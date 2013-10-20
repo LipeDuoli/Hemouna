@@ -5,7 +5,6 @@ caminho: http://localhost:8080/Hemouna/api/hospital
 }
 
 
-
 Para cadastro de usuario:
 caminho: http://localhost:8080/Hemouna/api/usuario
 {
@@ -28,6 +27,23 @@ caminho: http://localhost:8080/Hemouna/api/paciente
     "hospital": {
         "id": 1
     },
-    "cpf": 11111111111,
+    "cpf": "11111111111",
     "nome": "Paciente 1"
+}
+
+
+Para cadastrar bolsa de sangue
+caminho: http://localhost:8080/Hemouna/api/bolsadesangue
+{
+    "sangue": {
+        "id": 1
+    },
+    "tipobolsa": {
+        "id": 1
+    },
+    "hospital": {
+        "id": 1
+    },
+    "validade": "12/12/1212",
+    "saida": 0
 }

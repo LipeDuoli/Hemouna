@@ -23,11 +23,5 @@
         <property name="saida" type="int">
             <column name="saida" not-null="true" />
         </property>
-        <set name="pacienteHasBolsadesangues" inverse="true">
-            <key>
-                <column name="bolsadesangue_id" not-null="true" />
-            </key>
-            <one-to-many class="com.hemouna.entidade.PacienteHasBolsadesangue" />
-        </set>
     </class>
 </hibernate-mapping>

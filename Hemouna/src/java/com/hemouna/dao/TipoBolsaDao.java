@@ -94,7 +94,7 @@ public class TipoBolsaDao implements IDao{
         try {
 session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            String hql = "FROM TipoBolsa";
+            String hql = "FROM Tipobolsa";
             Query query = session.createQuery(hql);
             return query.list();
         } catch (HibernateException he) {
