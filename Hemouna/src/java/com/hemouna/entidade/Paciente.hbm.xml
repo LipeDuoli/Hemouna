@@ -8,12 +8,9 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="sangue" class="com.hemouna.entidade.Sangue" fetch="select">
-            <column name="sangue_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="hospital" class="com.hemouna.entidade.Hospital" fetch="select">
-            <column name="hospital_id" not-null="true" />
-        </many-to-one>
+        <one-to-one name="sangue" class="com.hemouna.entidade.Sangue" cascade="save-update"/>
+        <one-to-one name="hospital" class="com.hemouna.entidade.Hospital" cascade="save-update"/>
+        
         <property name="cpf" type="string">
             <column name="cpf" length="11" not-null="true" />
         </property>
