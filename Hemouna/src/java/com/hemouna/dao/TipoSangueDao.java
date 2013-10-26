@@ -4,7 +4,7 @@
  */
 package com.hemouna.dao;
 
-import com.hemouna.entidade.Usuarios;
+import com.hemouna.entidade.Tiposangue;
 import com.hemouna.persistencia.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -19,7 +19,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Fillipe
  */
-public class UsuariosDao implements IDao {
+public class TipoSangueDao implements IDao {
 
     private Session session;
     private Transaction transaction;
@@ -61,7 +61,7 @@ public class UsuariosDao implements IDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Usuarios tb = (Usuarios) session.get(new Usuarios().getClass(), id);
+            Tiposangue tb = (Tiposangue) session.get(new Tiposangue().getClass(), id);
             if (tb != null) {
                 session.delete(tb);
                 transaction.commit();
@@ -81,7 +81,7 @@ public class UsuariosDao implements IDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            return session.get(new Usuarios().getClass(), id);
+            return session.get(new Tiposangue().getClass(), id);
         } catch (HibernateException he) {
             return null;
         } finally {
@@ -94,7 +94,7 @@ public class UsuariosDao implements IDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            String hql = "FROM Usuarios";
+            String hql = "FROM Tiposangue";
             Query query = session.createQuery(hql);
             return query.list();
         } catch (HibernateException he) {

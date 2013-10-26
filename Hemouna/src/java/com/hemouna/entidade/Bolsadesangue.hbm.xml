@@ -1,24 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/10/2013 18:18:01 by Hibernate Tools 3.2.1.GA -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2013 16:53:19 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.hemouna.entidade.Bolsadesangue" table="bolsadesangue" catalog="hemounadb">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <one-to-one name="sangue" class="com.hemouna.entidade.Sangue" cascade="save-update"/>
-           
-        <one-to-one name="tipobolsa" class="com.hemouna.entidade.Tipobolsa" cascade="save-update"/>
-      
-        <one-to-one name="hospital" class="com.hemouna.entidade.Hospital" cascade="save-update"/>
-         
+        <one-to-one name="paciente" class="com.hemouna.entidade.Paciente" fetch="select"></one-to-one>
+        <one-to-one name="tiposangue" class="com.hemouna.entidade.Tiposangue" fetch="select"></one-to-one>
+        <one-to-one name="tipobolsa" class="com.hemouna.entidade.Tipobolsa" fetch="select"></one-to-one>
+        <one-to-one name="hospital" class="com.hemouna.entidade.Hospital" fetch="select"></one-to-one>
         <property name="validade" type="string">
             <column name="validade" length="10" not-null="true" />
         </property>
-        <property name="saida" type="int">
-            <column name="saida" not-null="true" />
+        <property name="datasaida" type="string">
+            <column name="datasaida" length="10" />
         </property>
     </class>
 </hibernate-mapping>

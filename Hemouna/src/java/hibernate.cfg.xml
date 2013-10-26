@@ -7,12 +7,10 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hemounadb</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">123456</property>
-    <mapping resource="com/hemouna/entidade/PacienteHasBolsadesangue.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Sangue.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Tipobolsa.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Usuarios.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Hospital.hbm.xml"/>
     <mapping resource="com/hemouna/entidade/Paciente.hbm.xml"/>
     <mapping resource="com/hemouna/entidade/Bolsadesangue.hbm.xml"/>
+    <mapping resource="com/hemouna/entidade/Tipobolsa.hbm.xml"/>
+    <mapping resource="com/hemouna/entidade/Tiposangue.hbm.xml"/>
+    <mapping resource="com/hemouna/entidade/Hospital.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

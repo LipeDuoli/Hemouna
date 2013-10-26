@@ -1,27 +1,16 @@
 Para cadastro de hospital:
 caminho: http://localhost:8080/Hemouna/api/hospital
 {
-    "nomehosp": "hospital"
-}
-
-
-Para cadastro de usuario:
-caminho: http://localhost:8080/Hemouna/api/usuario
-{
-    "hospital": {
-        "id": 1
-    },
+    "nomehosp": "hospital",
     "login": "usuario",
     "senha": "senha",
     "primeirologin": 1
 }
 
-
-
 Para cadastro de pacientes
 caminho: http://localhost:8080/Hemouna/api/paciente
 {
-    "sangue": {
+    "tiposangue": {
         "id": 1
     },
     "hospital": {
@@ -35,7 +24,7 @@ caminho: http://localhost:8080/Hemouna/api/paciente
 Para cadastrar bolsa de sangue
 caminho: http://localhost:8080/Hemouna/api/bolsadesangue
 {
-    "sangue": {
+    "tiposangue": {
         "id": 1
     },
     "tipobolsa": {
@@ -44,6 +33,5 @@ caminho: http://localhost:8080/Hemouna/api/bolsadesangue
     "hospital": {
         "id": 1
     },
-    "validade": "12/12/1212",
-    "saida": 0
+    "validade": "12/12/1212"
 }

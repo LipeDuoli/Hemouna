@@ -6,7 +6,7 @@
 package com.hemouna.servico;
 
 import com.google.gson.Gson;
-import com.hemouna.dao.SangueDao;
+import com.hemouna.dao.TipoSangueDao;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,14 +17,14 @@ import javax.ws.rs.core.Response;
  *
  * @author Fillipe
  */
-@Path("/sangue")
+@Path("/tiposangue")
 public class RestSangue {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarTipoSangue() {
         try {
-            String json = new Gson().toJson(new SangueDao().listarTodos());
+            String json = new Gson().toJson(new TipoSangueDao().listarTodos());
             return Response.status(Response.Status.OK).entity(json).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

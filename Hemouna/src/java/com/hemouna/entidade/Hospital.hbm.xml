@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/10/2013 18:18:01 by Hibernate Tools 3.2.1.GA -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2013 16:53:19 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.hemouna.entidade.Hospital" table="hospital" catalog="hemounadb">
         <id name="id" type="java.lang.Integer">
@@ -11,6 +11,14 @@
         <property name="nomehosp" type="string">
             <column name="nomehosp" length="50" not-null="true" />
         </property>
- 
+        <property name="login" type="string">
+            <column name="login" length="45" not-null="true" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" length="45" not-null="true" />
+        </property>
+        <property name="primeirologin" type="int">
+            <column name="primeirologin" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>
