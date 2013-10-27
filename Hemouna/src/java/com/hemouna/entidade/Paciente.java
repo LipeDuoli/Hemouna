@@ -1,5 +1,5 @@
 package com.hemouna.entidade;
-// Generated 26/10/2013 16:53:18 by Hibernate Tools 3.6.0
+// Generated 27/10/2013 19:16:15 by Hibernate Tools 3.6.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +14,7 @@ public class Paciente implements java.io.Serializable {
     private Hospital hospital;
     private String cpf;
     private String nome;
+    private Set<Bolsadesangue> bolsadesangues = new HashSet(0);
 
     public Paciente() {
     }
@@ -23,6 +24,14 @@ public class Paciente implements java.io.Serializable {
         this.hospital = hospital;
         this.cpf = cpf;
         this.nome = nome;
+    }
+
+    public Paciente(Tiposangue tiposangue, Hospital hospital, String cpf, String nome, Set<Bolsadesangue> bolsadesangues) {
+        this.tiposangue = tiposangue;
+        this.hospital = hospital;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.bolsadesangues = bolsadesangues;
     }
 
     public Integer getId() {
@@ -63,6 +72,14 @@ public class Paciente implements java.io.Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Set<Bolsadesangue> getBolsadesangues() {
+        return this.bolsadesangues;
+    }
+
+    public void setBolsadesangues(Set<Bolsadesangue> bolsadesangues) {
+        this.bolsadesangues = bolsadesangues;
     }
 
 }

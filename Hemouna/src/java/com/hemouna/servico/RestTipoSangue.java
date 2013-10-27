@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
  * @author Fillipe
  */
 @Path("/tiposangue")
-public class RestSangue {
+public class RestTipoSangue {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

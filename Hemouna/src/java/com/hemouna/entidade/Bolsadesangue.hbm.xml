@@ -1,17 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26/10/2013 16:53:19 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27/10/2013 19:16:15 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.hemouna.entidade.Bolsadesangue" table="bolsadesangue" catalog="hemounadb">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <one-to-one name="paciente" class="com.hemouna.entidade.Paciente" fetch="select"></one-to-one>
-        <one-to-one name="tiposangue" class="com.hemouna.entidade.Tiposangue" fetch="select"></one-to-one>
-        <one-to-one name="tipobolsa" class="com.hemouna.entidade.Tipobolsa" fetch="select"></one-to-one>
-        <one-to-one name="hospital" class="com.hemouna.entidade.Hospital" fetch="select"></one-to-one>
+        <many-to-one name="paciente" class="com.hemouna.entidade.Paciente" fetch="select">
+            <column name="paciente_id" />
+        </many-to-one>
+        <many-to-one name="tiposangue" class="com.hemouna.entidade.Tiposangue" fetch="select">
+            <column name="tiposangue_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipobolsa" class="com.hemouna.entidade.Tipobolsa" fetch="select">
+            <column name="tipobolsa_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hospital" class="com.hemouna.entidade.Hospital" fetch="select">
+            <column name="hospital_id" not-null="true" />
+        </many-to-one>
         <property name="validade" type="string">
             <column name="validade" length="10" not-null="true" />
         </property>
