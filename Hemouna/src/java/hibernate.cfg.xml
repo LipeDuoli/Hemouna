@@ -9,10 +9,10 @@
     <property name="hibernate.connection.password">123456</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
-    <mapping resource="com/hemouna/entidade/Paciente.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Bolsadesangue.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Tipobolsa.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Tiposangue.hbm.xml"/>
-    <mapping resource="com/hemouna/entidade/Hospital.hbm.xml"/>
+    <mapping class="com.hemouna.entidade.Bolsadesangue"/>
+    <mapping class="com.hemouna.entidade.Tiposangue"/>
+    <mapping class="com.hemouna.entidade.Paciente"/>
+    <mapping class="com.hemouna.entidade.Tipobolsa"/>
+    <mapping class="com.hemouna.entidade.Hospital"/>
   </session-factory>
 </hibernate-configuration>
