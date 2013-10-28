@@ -12,7 +12,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -77,11 +76,13 @@ public class BolsaDeSangueDao implements IDao {
     }
 
     @Override
-    public Object getId(Integer id) {
+    public List<Object> getId(int id) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            return session.get(new Bolsadesangue().getClass(), id);
+            Criteria criteria = this.session.createCriteria(new Bolsadesangue().getClass());
+            criteria.add(Restrictions.eq("id", id));
+            return criteria.list();
         } catch (HibernateException he) {
             return null;
         } finally {

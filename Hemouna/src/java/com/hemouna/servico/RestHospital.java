@@ -33,7 +33,7 @@ public class RestHospital {
             hDao.salvar(h);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
-           return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 
@@ -44,7 +44,19 @@ public class RestHospital {
             String json = new Gson().toJson(new HospitalDao().listarTodos());
             return Response.status(Response.Status.OK).entity(json).build();
         } catch (Exception e) {
-           return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response obterHospital(@PathParam("id") int id) {
+        try {
+            String json = new Gson().toJson(new HospitalDao().getId(id));
+            return Response.status(Response.Status.OK).entity(json).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 }

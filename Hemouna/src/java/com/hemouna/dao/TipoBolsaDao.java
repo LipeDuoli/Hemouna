@@ -12,7 +12,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -77,12 +76,14 @@ public class TipoBolsaDao implements IDao{
     }
 
     @Override
-    public Object getId(Integer id) {
-        try{
+    public List<Object> getId(int id) {
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            return session.get(new Tipobolsa().getClass(), id);
-        } catch (HibernateException he){
+            Criteria criteria = this.session.createCriteria(new Tipobolsa().getClass());
+            criteria.add(Restrictions.eq("id", id));
+            return criteria.list();
+        } catch (HibernateException he) {
             return null;
         } finally {
             session.close();

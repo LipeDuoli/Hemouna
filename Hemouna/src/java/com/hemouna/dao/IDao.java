@@ -14,6 +14,6 @@ public interface IDao {
     public boolean salvar(Object obj);
     public boolean alterar(Object obj);
     public boolean excluir(Integer id);
-    public Object getId(Integer id);
+    public List<Object> getId(int id);
     public List<Object>listarTodos();
 }
