@@ -11,6 +11,7 @@ import com.hemouna.entidade.Paciente;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -49,6 +50,19 @@ public class RestPaciente {
         }
     }
 
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response alterarPaciente(String paciente_str) {
+        try {
+            Paciente p = new Gson().fromJson(paciente_str, Paciente.class);
+            PacienteDao pDao = new PacienteDao();
+            pDao.alterar(p);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,10 +77,13 @@ public class RestPaciente {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{id}/bolsadesangue")
-    public Response retornaAsBolasDeSangueDoPaciente(@QueryParam("id") String id) {
-
-        // select * from bolsadesangue where idpaciente = id
-        return null;
+    @Path("/{id}/bolsas")
+    public Response retornaAsBolasDeSangueDoPaciente(@PathParam("id") int id) {
+        try {
+            String json = new Gson().toJson(new PacienteDao().getbolsas(id));
+            return Response.status(Response.Status.OK).entity(json).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
     }
 }

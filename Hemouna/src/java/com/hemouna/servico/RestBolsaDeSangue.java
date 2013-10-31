@@ -11,6 +11,7 @@ import com.hemouna.entidade.Bolsadesangue;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -26,9 +27,9 @@ public class RestBolsaDeSangue {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cadastrarBolsa(String hosp_str) {
+    public Response cadastrarBolsa(String bolsa_str) {
         try {
-            Bolsadesangue b = new Gson().fromJson(hosp_str, Bolsadesangue.class);
+            Bolsadesangue b = new Gson().fromJson(bolsa_str, Bolsadesangue.class);
             BolsaDeSangueDao bDao = new BolsaDeSangueDao();
             bDao.salvar(b);
             return Response.status(Response.Status.CREATED).build();
@@ -43,6 +44,19 @@ public class RestBolsaDeSangue {
         try {
             String json = new Gson().toJson(new BolsaDeSangueDao().listarTodos());
             return Response.status(Response.Status.OK).entity(json).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response alterarBolsa(String bolsa_str) {
+        try {
+            Bolsadesangue b = new Gson().fromJson(bolsa_str, Bolsadesangue.class);
+            BolsaDeSangueDao bDao = new BolsaDeSangueDao();
+            bDao.alterar(b);
+            return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }

@@ -4,6 +4,7 @@
  */
 package com.hemouna.dao;
 
+import com.hemouna.entidade.Bolsadesangue;
 import com.hemouna.entidade.Paciente;
 import com.hemouna.persistencia.HibernateUtil;
 import java.util.List;
@@ -98,6 +99,20 @@ public class PacienteDao implements IDao {
             String hql = "FROM Paciente";
             Query query = session.createQuery(hql);
             return query.list();
+        } catch (HibernateException he) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<Object> getbolsas(int id) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Criteria criteria = this.session.createCriteria(new Bolsadesangue().getClass());
+            criteria.add(Restrictions.eq("paciente_id", id));
+            return criteria.list();
         } catch (HibernateException he) {
             return null;
         } finally {
