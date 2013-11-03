@@ -61,7 +61,8 @@ public class PacienteDao implements IDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Paciente tb = (Paciente) session.get(new Paciente().getClass(), id);
+            Paciente tb = new Paciente();
+            tb.setId(id);
             if (tb != null) {
                 session.delete(tb);
                 transaction.commit();
@@ -110,8 +111,8 @@ public class PacienteDao implements IDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Criteria criteria = this.session.createCriteria(new Bolsadesangue().getClass());
-            criteria.add(Restrictions.eq("paciente_id", id));
+            Criteria criteria = this.session.createCriteria(Bolsadesangue.class);
+            criteria.add(Restrictions.eq("paciente.id", id));
             return criteria.list();
         } catch (HibernateException he) {
             return null;

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.hemouna.dao.PacienteDao;
 import com.hemouna.entidade.Paciente;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -57,6 +58,20 @@ public class RestPaciente {
             Paciente p = new Gson().fromJson(paciente_str, Paciente.class);
             PacienteDao pDao = new PacienteDao();
             pDao.alterar(p);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response apagarPaciente(String paciente_str) {
+        try {
+            Paciente p = new Gson().fromJson(paciente_str, Paciente.class);
+            PacienteDao pDao = new PacienteDao();
+            int id = p.getId();
+            pDao.excluir(id);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
