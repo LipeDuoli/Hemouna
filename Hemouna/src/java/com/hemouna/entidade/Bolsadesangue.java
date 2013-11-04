@@ -3,7 +3,6 @@ package com.hemouna.entidade;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
@@ -24,26 +23,29 @@ public class Bolsadesangue implements java.io.Serializable {
     private Tiposangue tiposangue;
     private Tipobolsa tipobolsa;
     private Hospital hospital;
+    private String numero;
     private String validade;
     private String datasaida;
 
     public Bolsadesangue() {
     }
 
-    public Bolsadesangue(Tiposangue tiposangue, Tipobolsa tipobolsa, Hospital hospital, String validade) {
+    public Bolsadesangue(Tiposangue tiposangue, Tipobolsa tipobolsa, Hospital hospital, String validade, String numero) {
         this.tiposangue = tiposangue;
         this.tipobolsa = tipobolsa;
         this.hospital = hospital;
         this.validade = validade;
+        this.numero = numero;
     }
 
-    public Bolsadesangue(Paciente paciente, Tiposangue tiposangue, Tipobolsa tipobolsa, Hospital hospital, String validade, String datasaida) {
+    public Bolsadesangue(Paciente paciente, Tiposangue tiposangue, Tipobolsa tipobolsa, Hospital hospital, String validade, String datasaida, String numero) {
         this.paciente = paciente;
         this.tiposangue = tiposangue;
         this.tipobolsa = tipobolsa;
         this.hospital = hospital;
         this.validade = validade;
         this.datasaida = datasaida;
+        this.numero = numero;
     }
 
     @Id
@@ -105,6 +107,15 @@ public class Bolsadesangue implements java.io.Serializable {
 
     public void setValidade(String validade) {
         this.validade = validade;
+    }
+
+    @Column(name = "numero", nullable = false, length = 15)
+    public String getNumero() {
+        return this.numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     @Column(name = "datasaida", length = 10)

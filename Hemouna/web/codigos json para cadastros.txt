@@ -36,5 +36,6 @@ caminho: http://localhost:8080/Hemouna/api/bolsadesangue
     "hospital": {
         "id": 1
     },
-    "validade": "12/12/1212"
+    "validade": "12/12/1212",
+    "numero": "123123123"
 }
