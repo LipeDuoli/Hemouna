@@ -5,21 +5,22 @@ $(document).ready(function() {
         var grid = $("#grid");
         grid.empty();
         
-        //Ajax paciente
-        var ajaxPaciente = $.ajax({
-            url: "./api/paciente/",
+        //Ajax bolsa
+        var ajaxBolsa = $.ajax({
+            url: "./api/bolsadesangue/",
             dataType: "json"
         });    
 
-        ajaxPaciente.done(function(data, textStatus, jqXHR) {
+        ajaxBolsa.done(function(data, textStatus, jqXHR) {
             //console.log(data, textStatus, jqXHR);
 
             var content = '<table class="table table-hover">';
             content += '<thead>';
             content += '<tr>';
-            content += '<th style="vertical-align: middle;">Paciente</th>';
-            content += '<th style="width: 130px;">Tipo de Sangue</th>';
-            content += '<th style="width: 100px;">Qtd. Bolsas</th>';
+            content += '<th>Nº da Bolsa</th>';
+            content += '<th>Validade</th>';
+            content += '<th>Tipo de Bolsa</th>';
+            content += '<th>Tipo de Sangue</th>';
             content += '<th style="width: 110px;">Ações</th>';
             content += '</tr>';
             content += '</thead>';
@@ -27,13 +28,14 @@ $(document).ready(function() {
 
             for(i=0; i<data.length; i++){
                 content += '<tr>';
-                content += '<td>' + data[i].nome + '</td>';
+                content += '<td>' + data[i].numero + '</td>';
+                content += '<td>' + data[i].validade + '</td>';
+                content += '<td>' + data[i].tipobolsa.nomebolsa + '</td>';
                 content += '<td>' + data[i].tiposangue.tiposangue + '</td>';
-                content += '<td>&nbsp;</td>';
                 content += '<td>';
-                content += '<button class="btnEditar btn btn-primary" id-paciente="' + data[i].id + '" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>';
+                content += '<button class="btnEditar btn btn-primary" id-bolsa="' + data[i].id + '" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>';
                 content += '&nbsp;&nbsp;';
-                content += '<button class="btnRemover btn btn-danger" id-paciente="' + data[i].id + '" title="Remover"><span class="glyphicon glyphicon-remove"></span></button>';
+                content += '<button class="btnRemover btn btn-danger" id-bolsa="' + data[i].id + '" title="Remover"><span class="glyphicon glyphicon-remove"></span></button>';
                 content += '</td>';
                 content += '</tr>';
             }
@@ -44,34 +46,35 @@ $(document).ready(function() {
             grid.append(content);
 
             $(".btnEditar").click(function(e) {
-                var idPaciente = ($(this).attr("id-paciente"));
-                var modal = $("#modalFormPaciente");
-                var form = $("#formPaciente")[0];
+                var idBolsa = ($(this).attr("id-bolsa"));
+                var modal = $("#modalFormBolsa");
+                var form = $("#formBolsa")[0];
 
                 form.reset();
 
-                var ajaxPaciente = $.ajax({
-                    url: "./api/paciente/" + idPaciente
+                var ajaxBolsa = $.ajax({
+                    url: "./api/bolsadesangue/" + idBolsa
                 });
 
-                ajaxPaciente.done(function(data, textStatus, jqXHR) {
+                ajaxBolsa.done(function(data, textStatus, jqXHR) {
                     //console.log(data);
 
                     $("#id").val(data[0].id);
-                    $("#nome").val(data[0].nome);
-                    $("#cpf").val(data[0].cpf);
+                    $("#numero").val(data[0].numero);
+                    $("#validade").val(data[0].validade);
                     $("#tiposangue").val(data[0].tiposangue.id);
+                    $("#tipobolsa").val(data[0].tipobolsa.id);
 
                     modal.modal({show: true});
                 });
 
-                ajaxPaciente.fail(function(data, textStatus, jqXHR) {
+                ajaxBolsa.fail(function(data, textStatus, jqXHR) {
                     console.log("Falha");
                 });
             });
         });
 
-        ajaxPaciente.fail(function(data, textStatus, jqXHR) {
+        ajaxBolsa.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
             alert("Falha");
         });
@@ -103,9 +106,35 @@ $(document).ready(function() {
         });
     }
     
+    function carregaTipoBolsa() {
+        //Ajax tipo sanguíneo
+        var ajaxTipoBolsa = $.ajax({
+            url: "./api/tipobolsa/",
+            dataType: "json"
+        });    
+
+        ajaxTipoBolsa.done(function(data, textStatus, jqXHR) {
+            //console.log(data);
+
+            var content = "";
+
+            for(i=0; i<data.length; i++){
+                content += '<option value="' + data[i].id + '">' + data[i].nomebolsa + '</option>';
+            }
+
+            var select = $("#tipobolsa");
+            select.append(content);
+        });
+
+        ajaxTipoBolsa.fail(function(data, textStatus, jqXHR) {
+            console.log(data, textStatus, jqXHR);
+            alert("Falha");
+        });
+    }
+    
     $("#btnNovo").click(function(e) {
-        var modal = $("#modalFormPaciente");
-        var form = $("#formPaciente")[0];
+        var modal = $("#modalFormBolsa");
+        var form = $("#formBolsa")[0];
         
         $("#id").val("");
         form.reset();
@@ -117,28 +146,29 @@ $(document).ready(function() {
         
         //Pega dados do formulário
         var id = $("#id").val();
-        var nome = $("#nome").val();
-        var cpf = $("#cpf").val();
+        var numero = $("#numero").val();
+        var validade = $("#validade").val();
         var tiposangue = parseInt($("#tiposangue").val());
+        var tipobolsa = parseInt($("#tipobolsa").val());
         
         var type;
         var dados;
         
         if(id == null || id == "") {
             type = "post";
-            dados = {nome: nome, cpf: cpf, tiposangue: {id: tiposangue}, hospital: {id: 1}};
+            dados = {numero: numero, validade: validade, tiposangue: {id: tiposangue}, tipobolsa: {id: tipobolsa}, hospital: {id: 1}};
         }
         else {
             type = "put";
-            dados = {id: id, nome: nome, cpf: cpf, tiposangue: {id: tiposangue}, hospital: {id: 1}};
+            dados = {id: id, numero: numero, validade: validade, tiposangue: {id: tiposangue}, tipobolsa: {id: tipobolsa}, hospital: {id: 1}};
         }
         
         var jsonDados = $.toJSON(dados);
         
-        //Ajax salva paciente
+        //Ajax salva bolsa
         
-        var ajaxSalvaPaciente = $.ajax({
-            url: "./api/paciente/",
+        var ajaxSalvaBolsa = $.ajax({
+            url: "./api/bolsadesangue/",
             accepts: {
                 text: "application/json"
             },
@@ -151,11 +181,11 @@ $(document).ready(function() {
                     var alert = '';
                     alert += '<div id="msg" class="alert alert-success fade in">';
                     alert += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-                    alert += '<strong>Sucesso!</strong> Os dados do paciente foram salvos com sucesso.';
+                    alert += '<strong>Sucesso!</strong> Os dados do bolsa foram salvos com sucesso.';
                     alert += '</div>';
                     $("#messages").append(alert);
                     
-                    $("#modalFormPaciente").modal('hide');
+                    $("#modalFormBolsa").modal('hide');
                     $("#msg").alert();
                     window.setTimeout(function() {
                         $("#msg").fadeTo(500, 0).slideUp(500, function(){
@@ -171,4 +201,5 @@ $(document).ready(function() {
     //Executa scripts
     carregaGrid();
     carregaTipoSangue();
+    carregaTipoBolsa();
 });
