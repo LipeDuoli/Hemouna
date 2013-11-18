@@ -13,6 +13,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -113,6 +114,27 @@ public class PacienteDao implements IDao {
             transaction = session.beginTransaction();
             Criteria criteria = this.session.createCriteria(Bolsadesangue.class);
             criteria.add(Restrictions.eq("paciente.id", id));
+            return criteria.list();
+        } catch (HibernateException he) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<Object> query(String nome, String tiposangue) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Criteria criteria = this.session.createCriteria(Paciente.class);
+            if(nome != null){
+                //nao esta reconhecendo a string
+                criteria.add(Restrictions.like("nome", nome, MatchMode.START));
+            }
+            if(tiposangue != null){
+                //como receber a tring correta (O+)
+                criteria.add(Restrictions.eq("tiposangue.tiposangue", tiposangue));
+            }
             return criteria.list();
         } catch (HibernateException he) {
             return null;

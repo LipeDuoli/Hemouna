@@ -101,4 +101,16 @@ public class RestPaciente {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/q")
+    public Response query(@QueryParam("nome") String nome, @QueryParam("tiposangue") String tiposangue){
+        try {
+            String json = new Gson().toJson(new PacienteDao().query(nome, tiposangue));
+            return Response.status(Response.Status.OK).entity(json).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
 }
