@@ -105,7 +105,7 @@ public class RestPaciente {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/q")
-    public Response query(@QueryParam("nome") String nome, @QueryParam("tiposangue") String tiposangue){
+    public Response query(@QueryParam("nome") String nome, @QueryParam("tiposangue") int tiposangue){
         try {
             String json = new Gson().toJson(new PacienteDao().query(nome, tiposangue));
             return Response.status(Response.Status.OK).entity(json).build();

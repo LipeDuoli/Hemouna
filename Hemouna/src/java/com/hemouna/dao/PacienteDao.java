@@ -122,18 +122,16 @@ public class PacienteDao implements IDao {
         }
     }
 
-    public List<Object> query(String nome, String tiposangue) {
+    public List<Object> query(String nome, int tiposangue) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = this.session.createCriteria(Paciente.class);
             if(nome != null){
-                //nao esta reconhecendo a string
                 criteria.add(Restrictions.like("nome", nome, MatchMode.START));
             }
-            if(tiposangue != null){
-                //como receber a tring correta (O+)
-                criteria.add(Restrictions.eq("tiposangue.tiposangue", tiposangue));
+            if(tiposangue != 0){
+                criteria.add(Restrictions.eq("tiposangue.id", tiposangue));
             }
             return criteria.list();
         } catch (HibernateException he) {

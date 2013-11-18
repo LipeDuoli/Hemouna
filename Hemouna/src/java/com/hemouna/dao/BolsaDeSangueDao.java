@@ -12,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -98,6 +99,31 @@ public class BolsaDeSangueDao implements IDao {
             String hql = "FROM Bolsadesangue";
             Query query = session.createQuery(hql);
             return query.list();
+        } catch (HibernateException he) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<Object> query(int numero, int tiposangue, int tipobolsa, String pnome) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Criteria criteria = this.session.createCriteria(Bolsadesangue.class);
+            if (numero != 0) {
+                criteria.add(Restrictions.eq("numero", numero));
+            }
+            if (tiposangue != 0) {
+                criteria.add(Restrictions.eq("tiposangue.id", tiposangue));
+            }
+            if (tipobolsa != 0) {
+                criteria.add(Restrictions.eq("tipobolsa.id", tipobolsa));
+            }
+            if (pnome != null) {
+                criteria.add(Restrictions.like("paciente.nome", pnome, MatchMode.START));
+            }
+            return criteria.list();
         } catch (HibernateException he) {
             return null;
         } finally {
