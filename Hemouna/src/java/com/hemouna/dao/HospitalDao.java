@@ -55,8 +55,8 @@ public class HospitalDao implements IDao {
         }
     }
 
-    @Override
-    public boolean excluir(Integer id) {
+    //@Override
+    public boolean excluir(int id) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();

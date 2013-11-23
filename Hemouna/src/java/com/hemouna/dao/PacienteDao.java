@@ -57,19 +57,15 @@ public class PacienteDao implements IDao {
         }
     }
 
-    @Override
-    public boolean excluir(Integer id) {
+    //@Override
+    public boolean excluir(Object obj) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Paciente tb = new Paciente();
-            tb.setId(id);
-            if (tb != null) {
-                session.delete(tb);
-                transaction.commit();
-                return true;
-            }
-            return false;
+            //Paciente tb = new Paciente();
+            session.delete(obj);
+            transaction.commit();
+            return true;
         } catch (HibernateException he) {
             transaction.rollback();
             return false;
@@ -127,10 +123,10 @@ public class PacienteDao implements IDao {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = this.session.createCriteria(Paciente.class);
-            if(nome != null){
+            if (nome != null) {
                 criteria.add(Restrictions.like("nome", nome, MatchMode.START));
             }
-            if(tiposangue != 0){
+            if (tiposangue != 0) {
                 criteria.add(Restrictions.eq("tiposangue.id", tiposangue));
             }
             return criteria.list();

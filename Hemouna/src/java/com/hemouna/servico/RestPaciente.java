@@ -66,13 +66,13 @@ public class RestPaciente {
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response apagarPaciente(String paciente_str) {
+    @Path("/{id}")
+    public Response apagarPaciente(@PathParam("id") int id) {
         try {
-            Paciente p = new Gson().fromJson(paciente_str, Paciente.class);
+            Paciente p = new Paciente(id);
             PacienteDao pDao = new PacienteDao();
-            int id = p.getId();
-            pDao.excluir(id);
-            return Response.status(Response.Status.CREATED).build();
+            pDao.excluir(p);
+            return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }

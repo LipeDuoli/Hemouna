@@ -26,6 +26,10 @@ public class Paciente implements java.io.Serializable {
 
     public Paciente() {
     }
+    
+    public Paciente(Integer id) {
+        this.id = id;
+    }
 
     public Paciente(Tiposangue tiposangue, Hospital hospital, String cpf, String nome) {
         this.tiposangue = tiposangue;

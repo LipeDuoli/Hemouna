@@ -13,7 +13,7 @@ import java.util.List;
 public interface IDao {
     public boolean salvar(Object obj);
     public boolean alterar(Object obj);
-    public boolean excluir(Integer id);
+    //public boolean excluir(Object obj);
     public List<Object> getId(int id);
     public List<Object>listarTodos();
 }

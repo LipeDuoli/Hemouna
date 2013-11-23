@@ -56,7 +56,7 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    @Override
+    //@Override
     public boolean excluir(Integer id) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
