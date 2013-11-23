@@ -56,18 +56,14 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    //@Override
-    public boolean excluir(Integer id) {
+    @Override
+    public boolean excluir(Object obj) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Bolsadesangue tb = (Bolsadesangue) session.get(new Bolsadesangue().getClass(), id);
-            if (tb != null) {
-                session.delete(tb);
-                transaction.commit();
-                return true;
-            }
-            return false;
+            session.delete(obj);
+            transaction.commit();
+            return true;
         } catch (HibernateException he) {
             transaction.rollback();
             return false;
@@ -106,7 +102,7 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    public List<Object> query(int numero, int tiposangue, int tipobolsa, String pnome) {
+    public List<Object> query(int numero, int tiposangue, int tipobolsa) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -119,9 +115,6 @@ public class BolsaDeSangueDao implements IDao {
             }
             if (tipobolsa != 0) {
                 criteria.add(Restrictions.eq("tipobolsa.id", tipobolsa));
-            }
-            if (pnome != null) {
-                criteria.add(Restrictions.like("paciente.nome", pnome, MatchMode.START));
             }
             return criteria.list();
         } catch (HibernateException he) {

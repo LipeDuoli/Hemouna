@@ -81,7 +81,7 @@ public class RestPaciente {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obterHospital(@PathParam("id") int id) {
+    public Response obterPaciente(@PathParam("id") int id) {
         try {
             String json = new Gson().toJson(new PacienteDao().getId(id));
             return Response.status(Response.Status.OK).entity(json).build();

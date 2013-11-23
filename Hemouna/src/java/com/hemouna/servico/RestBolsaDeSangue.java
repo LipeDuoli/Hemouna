@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.hemouna.dao.BolsaDeSangueDao;
 import com.hemouna.entidade.Bolsadesangue;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -63,6 +64,20 @@ public class RestBolsaDeSangue {
         }
     }
 
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response apagarBolsa(@PathParam("id") int id) {
+        try {
+            Bolsadesangue b = new Bolsadesangue(id);
+            BolsaDeSangueDao bDao = new BolsaDeSangueDao();
+            bDao.excluir(b);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -78,9 +93,9 @@ public class RestBolsaDeSangue {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/q")
-    public Response query(@QueryParam("numero") int numero, @QueryParam("tiposangue") int tiposangue, @QueryParam("tipobolsa") int tipobolsa, @QueryParam("pnome") String pnome) {
+    public Response query(@QueryParam("numero") int numero, @QueryParam("tiposangue") int tiposangue, @QueryParam("tipobolsa") int tipobolsa) {
         try {
-            String json = new Gson().toJson(new BolsaDeSangueDao().query(numero, tiposangue, tipobolsa, pnome));
+            String json = new Gson().toJson(new BolsaDeSangueDao().query(numero, tiposangue, tipobolsa));
             return Response.status(Response.Status.OK).entity(json).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

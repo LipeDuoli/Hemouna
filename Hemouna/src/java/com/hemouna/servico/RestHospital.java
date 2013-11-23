@@ -8,6 +8,7 @@ import com.hemouna.dao.HospitalDao;
 import com.hemouna.entidade.Hospital;
 import com.google.gson.Gson;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -56,6 +57,20 @@ public class RestHospital {
             HospitalDao hDao = new HospitalDao();
             hDao.alterar(h);
             return Response.status(Response.Status.CREATED).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response apagarHospital(@PathParam("id") int id) {
+        try {
+            Hospital h = new Hospital(id);
+            HospitalDao hDao = new HospitalDao();
+            hDao.excluir(h);
+            return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }

@@ -55,18 +55,14 @@ public class HospitalDao implements IDao {
         }
     }
 
-    //@Override
-    public boolean excluir(int id) {
+    @Override
+    public boolean excluir(Object obj) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Hospital tb = (Hospital) session.get(new Hospital().getClass(), id);
-            if (tb != null) {
-                session.delete(tb);
-                transaction.commit();
-                return true;
-            }
-            return false;
+            session.delete(obj);
+            transaction.commit();
+            return true;
         } catch (HibernateException he) {
             transaction.rollback();
             return false;

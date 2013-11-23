@@ -25,6 +25,10 @@ public class Hospital implements java.io.Serializable {
     public Hospital() {
     }
 
+    public Hospital(Integer id) {
+        this.id = id;
+    }
+
     public Hospital(String nomehosp, String login, String senha, int primeirologin) {
         this.nomehosp = nomehosp;
         this.login = login;

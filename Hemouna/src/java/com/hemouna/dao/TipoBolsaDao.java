@@ -55,19 +55,15 @@ public class TipoBolsaDao implements IDao{
         }
     }
 
-    //@Override
-    public boolean excluir(Integer id) {
-        try{
+    @Override
+    public boolean excluir(Object obj) {
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Tipobolsa tb = (Tipobolsa) session.get(new Tipobolsa().getClass(), id);
-            if(tb != null){
-                session.delete(tb);
-                transaction.commit();
-                return true;
-            }
-            return false;
-        } catch (HibernateException he){
+            session.delete(obj);
+            transaction.commit();
+            return true;
+        } catch (HibernateException he) {
             transaction.rollback();
             return false;
         } finally {

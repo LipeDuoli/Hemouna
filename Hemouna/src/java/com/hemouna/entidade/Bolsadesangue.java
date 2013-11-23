@@ -29,6 +29,10 @@ public class Bolsadesangue implements java.io.Serializable {
 
     public Bolsadesangue() {
     }
+    
+    public Bolsadesangue(Integer id) {
+        this.id = id;
+    }
 
     public Bolsadesangue(Tiposangue tiposangue, Tipobolsa tipobolsa, Hospital hospital, String validade, String numero) {
         this.tiposangue = tiposangue;
