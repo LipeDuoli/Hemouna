@@ -10,9 +10,11 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 /**
  *
@@ -94,6 +96,20 @@ public class HospitalDao implements IDao {
             String hql = "FROM Hospital";
             Query query = session.createQuery(hql);
             return query.list();
+        } catch (HibernateException he) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public Hospital buscaLogin(String login) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            List l = this.session.createSQLQuery("select * from hospital where login = :login").setParameter("login", login).setResultTransformer(Transformers.aliasToBean(Hospital.class)).list();
+            Hospital h = (Hospital) l.get(0);
+            return h;
         } catch (HibernateException he) {
             return null;
         } finally {

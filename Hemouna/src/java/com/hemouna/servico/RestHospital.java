@@ -4,6 +4,8 @@
  */
 package com.hemouna.servico;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import com.hemouna.dao.HospitalDao;
 import com.hemouna.entidade.Hospital;
 import com.google.gson.Gson;
@@ -31,6 +33,8 @@ public class RestHospital {
         try {
             Hospital h = new Gson().fromJson(hosp_str, Hospital.class);
             HospitalDao hDao = new HospitalDao();
+            String pass = Hashing.sha1().hashString(h.getSenha(), Charsets.UTF_8).toString();
+            h.setSenha(pass);
             hDao.salvar(h);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
