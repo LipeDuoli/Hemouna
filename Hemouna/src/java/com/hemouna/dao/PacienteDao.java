@@ -117,7 +117,7 @@ public class PacienteDao implements IDao {
         }
     }
 
-    public List<Object> query(String nome, int tiposangue) {
+    public List<Object> query(String nome, int tiposangue, int hospital) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -127,6 +127,9 @@ public class PacienteDao implements IDao {
             }
             if (tiposangue != 0) {
                 criteria.add(Restrictions.eq("tiposangue.id", tiposangue));
+            }
+            if(hospital != 0){
+                criteria.add(Restrictions.eq("hospital.id", hospital));
             }
             return criteria.list();
         } catch (HibernateException he) {

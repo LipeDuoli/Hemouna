@@ -102,7 +102,7 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    public List<Object> query(int numero, int tiposangue, int tipobolsa) {
+    public List<Object> query(int numero, int tiposangue, int tipobolsa, int hospital) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -115,6 +115,9 @@ public class BolsaDeSangueDao implements IDao {
             }
             if (tipobolsa != 0) {
                 criteria.add(Restrictions.eq("tipobolsa.id", tipobolsa));
+            }
+            if (hospital != 0) {
+                criteria.add(Restrictions.eq("hospital.id", hospital));
             }
             return criteria.list();
         } catch (HibernateException he) {
