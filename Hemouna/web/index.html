@@ -2,13 +2,17 @@
 <html>
 <head>
 <title>Hemouna - Login</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
 
 <link href="./css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
 
+<script type="text/javascript" src="./js/validaUsuario.js"></script>
 <script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/jquery.json.js"></script>
 <script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="./js/login.js"></script>
+
 <style type="text/css">
     body {
         padding-top: 150px;
@@ -45,10 +49,11 @@
 <body>
     <div class="container">
         <form class="form-signin" style="text-align: center;">
+            <div id="messages"></div>
             <img src="./img/logohemouna.png" style="text-align: middle;" />
-            <input type="text" class="input-block-level" placeholder="Usuário">
-            <input type="password" class="input-block-level" placeholder="Senha">
-            <button class="btn btn-large btn-primary" type="submit">Entrar</button>
+            <input id="usuario" type="text" class="input-block-level" placeholder="UsuÃ¡rio">
+            <input id="senha" type="password" class="input-block-level" placeholder="Senha">
+            <button id="btnLogin" class="btn btn-large btn-primary">Entrar</button>
         </form>
     </div> <!-- /container -->
 </body>

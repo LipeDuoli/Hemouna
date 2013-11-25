@@ -169,6 +169,7 @@ $(document).ready(function() {
     });
     
     //Executa scripts
+    validaUsuario();
     carregaGrid();
     carregaTipoSangue();
 });
