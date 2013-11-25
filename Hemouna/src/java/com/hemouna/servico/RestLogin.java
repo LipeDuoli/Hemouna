@@ -33,6 +33,7 @@ public class RestLogin {
             if(!pass.equals(h.getSenha())){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
+            h.setSenha("");
             String json = new Gson().toJson(h);
             return Response.status(Response.Status.OK).entity(json).build();
         } catch (Exception e) {
