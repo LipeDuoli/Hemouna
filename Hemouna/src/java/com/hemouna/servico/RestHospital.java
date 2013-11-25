@@ -59,6 +59,10 @@ public class RestHospital {
         try {
             Hospital h = new Gson().fromJson(hosp_str, Hospital.class);
             HospitalDao hDao = new HospitalDao();
+            if (h.getSenha() != null) {
+                String pass = Hashing.sha1().hashString(h.getSenha(), Charsets.UTF_8).toString();
+                h.setSenha(pass);
+            }
             hDao.alterar(h);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
