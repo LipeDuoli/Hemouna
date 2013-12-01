@@ -65,14 +65,17 @@ public class RestPaciente {
     }
 
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response apagarPaciente(@PathParam("id") int id) {
         try {
             Paciente p = new Paciente(id);
             PacienteDao pDao = new PacienteDao();
-            pDao.excluir(p);
-            return Response.status(Response.Status.OK).build();
+            if (pDao.excluir(p) == true) {
+                return Response.status(Response.Status.OK).build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
@@ -101,11 +104,11 @@ public class RestPaciente {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/q")
-    public Response query(@QueryParam("nome") String nome, @QueryParam("tiposangue") int tiposangue, @QueryParam("hospital") int hospital){
+    public Response query(@QueryParam("nome") String nome, @QueryParam("tiposangue") int tiposangue, @QueryParam("hospital") int hospital) {
         try {
             String json = new Gson().toJson(new PacienteDao().query(nome, tiposangue, hospital));
             return Response.status(Response.Status.OK).entity(json).build();

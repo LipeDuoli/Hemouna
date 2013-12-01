@@ -65,14 +65,17 @@ public class RestBolsaDeSangue {
     }
 
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response apagarBolsa(@PathParam("id") int id) {
         try {
             Bolsadesangue b = new Bolsadesangue(id);
             BolsaDeSangueDao bDao = new BolsaDeSangueDao();
-            bDao.excluir(b);
-            return Response.status(Response.Status.OK).build();
+            if (bDao.excluir(b) == true) {
+                return Response.status(Response.Status.OK).build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
