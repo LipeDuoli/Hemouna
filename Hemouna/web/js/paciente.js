@@ -56,7 +56,6 @@ $(document).ready(function() {
                 var idPaciente = ($(this).attr("id-paciente"));
                 var modal = $("#modalFormPaciente");
                 var form = $("#formPaciente")[0];
-
                 form.reset();
 
                 var ajaxPaciente = $.ajax({
@@ -70,7 +69,9 @@ $(document).ready(function() {
                     $("#nome").val(data[0].nome);
                     $("#cpf").val(data[0].cpf);
                     $("#tiposangue").val(data[0].tiposangue.id);
-
+                    
+                    $("#divBolsasAssociadas").show();
+                    
                     modal.modal({show: true});
                 });
 
@@ -129,7 +130,8 @@ $(document).ready(function() {
         var modal = $("#modalFormPaciente");
         var form = $("#formPaciente")[0];
         
-        $("#id").val("");
+        $("#id").val("");        
+        $("#divBolsasAssociadas").hide();
         form.reset();
         modal.modal({show: true});
     });
@@ -221,6 +223,28 @@ $(document).ready(function() {
 
         ajaxRemovePaciente.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
+            console.log("Falha");
+        });
+    });
+    
+    //Abre modal para associar bolsa
+    $("#btnAssociaBolsa").click(function(e) {
+        
+        e.preventDefault();
+        
+        var modal = $("#modalListaBolsas");
+        
+        var ajaxBuscaBolsas = $.ajax({
+            url: "./api/bolsadesangue/q?hospital=" + usuarioLogado.id + "&tipo=null"
+        });
+        
+        ajaxBuscaBolsas.done(function(data, textStatus, jqXHR) {
+            console.log(data);
+
+            modal.modal({show: true});
+        });
+
+        ajaxBuscaBolsas.fail(function(data, textStatus, jqXHR) {
             console.log("Falha");
         });
     });
