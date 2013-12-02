@@ -57,13 +57,12 @@ public class PacienteDao implements IDao {
         }
     }
 
-    @Override
-    public boolean excluir(Object obj) {
+    public boolean excluir(int id) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.delete(obj);
-            transaction.commit();
+            session.createSQLQuery("DELETE FROM paciente WHERE id=:id").setParameter("id", id);
+            //transaction.commit();
             return true;
         } catch (HibernateException he) {
             transaction.rollback();

@@ -12,7 +12,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -56,7 +55,6 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    @Override
     public boolean excluir(Object obj) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -102,7 +100,7 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    public List<Object> query(int numero, int tiposangue, int tipobolsa, int hospital) {
+    public List<Object> query(int numero, int tiposangue, int tipobolsa, int hospital, String tipo) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -118,6 +116,9 @@ public class BolsaDeSangueDao implements IDao {
             }
             if (hospital != 0) {
                 criteria.add(Restrictions.eq("hospital.id", hospital));
+            }
+            if (tipo != null) {
+                criteria.add(Restrictions.isNull("paciente.id"));
             }
             return criteria.list();
         } catch (HibernateException he) {

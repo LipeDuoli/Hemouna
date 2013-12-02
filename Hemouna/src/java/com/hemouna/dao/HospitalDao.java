@@ -10,7 +10,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -57,7 +56,6 @@ public class HospitalDao implements IDao {
         }
     }
 
-    @Override
     public boolean excluir(Object obj) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();

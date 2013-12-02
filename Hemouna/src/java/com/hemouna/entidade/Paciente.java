@@ -26,7 +26,7 @@ public class Paciente implements java.io.Serializable {
 
     public Paciente() {
     }
-    
+
     public Paciente(Integer id) {
         this.id = id;
     }

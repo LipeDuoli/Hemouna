@@ -56,22 +56,6 @@ public class TipoSangueDao implements IDao {
     }
 
     @Override
-    public boolean excluir(Object obj) {
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.delete(obj);
-            transaction.commit();
-            return true;
-        } catch (HibernateException he) {
-            transaction.rollback();
-            return false;
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
     public List<Object> getId(int id) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
