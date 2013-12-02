@@ -69,9 +69,9 @@ public class RestPaciente {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response apagarPaciente(@PathParam("id") int id) {
         try {
-            //Paciente p = new Paciente(id);
+            Paciente p = new Paciente(id);
             PacienteDao pDao = new PacienteDao();
-            if (pDao.excluir(id) == true) {
+            if (pDao.excluir(p) == true) {
                 return Response.status(Response.Status.OK).build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();

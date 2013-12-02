@@ -55,11 +55,12 @@ public class BolsaDeSangueDao implements IDao {
         }
     }
 
-    public boolean excluir(Object obj) {
+    public boolean excluir(Bolsadesangue obj) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.delete(obj);
+            Object obj2 = session.load(Bolsadesangue.class, obj.getId());
+            session.delete(obj2);
             transaction.commit();
             return true;
         } catch (HibernateException he) {
