@@ -1,5 +1,12 @@
 $(document).ready(function() {
     
+    validaUsuario();
+    
+    var cookieUser = lerCookie('hospital');
+    var usuarioLogado = $.parseJSON(cookieUser);
+    
+    $("#lblUsuario").text(usuarioLogado.nomehosp);
+    
     function carregaGrid() {
         
         var grid = $("#grid");
@@ -7,7 +14,7 @@ $(document).ready(function() {
         
         //Ajax paciente
         var ajaxPaciente = $.ajax({
-            url: "./api/paciente/",
+            url: "./api/paciente/q?hospital=" + usuarioLogado.id,
             dataType: "json"
         });    
 
@@ -18,8 +25,9 @@ $(document).ready(function() {
             content += '<thead>';
             content += '<tr>';
             content += '<th style="vertical-align: middle;">Paciente</th>';
+            content += '<th>CPF</th>';
             content += '<th style="width: 130px;">Tipo de Sangue</th>';
-            content += '<th style="width: 100px;">Qtd. Bolsas</th>';
+            //content += '<th style="width: 100px;">Qtd. Bolsas</th>';
             content += '<th style="width: 110px;">Ações</th>';
             content += '</tr>';
             content += '</thead>';
@@ -28,8 +36,9 @@ $(document).ready(function() {
             for(i=0; i<data.length; i++){
                 content += '<tr>';
                 content += '<td>' + data[i].nome + '</td>';
+                content += '<td>' + data[i].cpf + '</td>';
                 content += '<td>' + data[i].tiposangue.tiposangue + '</td>';
-                content += '<td>&nbsp;</td>';
+                //content += '<td>&nbsp;</td>';
                 content += '<td>';
                 content += '<button class="btnEditar btn btn-primary" id-paciente="' + data[i].id + '" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>';
                 content += '&nbsp;&nbsp;';
@@ -69,11 +78,23 @@ $(document).ready(function() {
                     console.log("Falha");
                 });
             });
+            
+            $(".btnRemover").click(function(e) {
+                var idPaciente = ($(this).attr("id-paciente"));
+                var modal = $("#modalRemovePaciente");
+                var form = $("#formRemovePaciente")[0];
+
+                form.reset();
+                
+                $("#remove-id").val(idPaciente);
+                
+                modal.modal({show: true});
+            });
         });
 
         ajaxPaciente.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
-            alert("Falha");
+            console.log("Falha");
         });
     }
     
@@ -99,10 +120,11 @@ $(document).ready(function() {
 
         ajaxTipoSangue.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
-            alert("Falha");
+            console.log("Falha");
         });
     }
     
+    //Novo Paciente
     $("#btnNovo").click(function(e) {
         var modal = $("#modalFormPaciente");
         var form = $("#formPaciente")[0];
@@ -126,17 +148,16 @@ $(document).ready(function() {
         
         if(id == null || id == "") {
             type = "post";
-            dados = {nome: nome, cpf: cpf, tiposangue: {id: tiposangue}, hospital: {id: 1}};
+            dados = {nome: nome, cpf: cpf, tiposangue: {id: tiposangue}, hospital: {id: usuarioLogado.id}};
         }
         else {
             type = "put";
-            dados = {id: id, nome: nome, cpf: cpf, tiposangue: {id: tiposangue}, hospital: {id: 1}};
+            dados = {id: id, nome: nome, cpf: cpf, tiposangue: {id: tiposangue}, hospital: {id: usuarioLogado.id}};
         }
         
         var jsonDados = $.toJSON(dados);
         
-        //Ajax salva paciente
-        
+        //Ajax salva paciente        
         var ajaxSalvaPaciente = $.ajax({
             url: "./api/paciente/",
             accepts: {
@@ -168,8 +189,43 @@ $(document).ready(function() {
         });
     });
     
+    //Remove paciente
+    $("#btnExcluir").click(function(e) {
+        
+        var id = $("#remove-id").val();
+        
+        //Ajax remove paciente        
+        var ajaxRemovePaciente = $.ajax({
+            url: "./api/paciente/" + id,
+            type: "delete"
+        });
+        
+        ajaxRemovePaciente.done(function(data, textStatus, jqXHR) {
+            
+            var alert = '';
+            alert += '<div id="msg" class="alert alert-success fade in">';
+            alert += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+            alert += '<strong>Sucesso!</strong> O paciente foi removido com sucesso.';
+            alert += '</div>';
+            $("#messages").append(alert);
+
+            $("#modalRemovePaciente").modal('hide');
+            $("#msg").alert();
+            window.setTimeout(function() {
+                $("#msg").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove(); 
+                });
+            }, 5000);
+            carregaGrid();
+        });
+
+        ajaxRemovePaciente.fail(function(data, textStatus, jqXHR) {
+            console.log(data, textStatus, jqXHR);
+            console.log("Falha");
+        });
+    });
+    
     //Executa scripts
-    validaUsuario();
     carregaGrid();
     carregaTipoSangue();
 });

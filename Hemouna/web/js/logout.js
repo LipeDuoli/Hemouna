@@ -1,0 +1,2 @@
+excluirCookie('hospital');
+window.location = "./";

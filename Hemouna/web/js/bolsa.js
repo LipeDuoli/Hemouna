@@ -1,5 +1,12 @@
 $(document).ready(function() {
     
+    validaUsuario();
+    
+    var cookieUser = lerCookie('hospital');
+    var usuarioLogado = $.parseJSON(cookieUser);
+    
+    $("#lblUsuario").text(usuarioLogado.nomehosp);
+    
     function carregaGrid() {
         
         var grid = $("#grid");
@@ -7,7 +14,7 @@ $(document).ready(function() {
         
         //Ajax bolsa
         var ajaxBolsa = $.ajax({
-            url: "./api/bolsadesangue/",
+            url: "./api/bolsadesangue/q?hospital=" + usuarioLogado.id,
             dataType: "json"
         });    
 
@@ -72,11 +79,23 @@ $(document).ready(function() {
                     console.log("Falha");
                 });
             });
+            
+            $(".btnRemover").click(function(e) {
+                var idBolsa = ($(this).attr("id-bolsa"));
+                var modal = $("#modalRemoveBolsa");
+                var form = $("#formRemoveBolsa")[0];
+
+                form.reset();
+                
+                $("#remove-id").val(idBolsa);
+                
+                modal.modal({show: true});
+            });
         });
 
         ajaxBolsa.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
-            alert("Falha");
+            console.log("Falha");
         });
     }
     
@@ -102,7 +121,7 @@ $(document).ready(function() {
 
         ajaxTipoSangue.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
-            alert("Falha");
+            console.log("Falha");
         });
     }
     
@@ -128,7 +147,7 @@ $(document).ready(function() {
 
         ajaxTipoBolsa.fail(function(data, textStatus, jqXHR) {
             console.log(data, textStatus, jqXHR);
-            alert("Falha");
+            console.log("Falha");
         });
     }
     
@@ -156,11 +175,11 @@ $(document).ready(function() {
         
         if(id == null || id == "") {
             type = "post";
-            dados = {numero: numero, validade: validade, tiposangue: {id: tiposangue}, tipobolsa: {id: tipobolsa}, hospital: {id: 1}};
+            dados = {numero: numero, validade: validade, tiposangue: {id: tiposangue}, tipobolsa: {id: tipobolsa}, hospital: {id: usuarioLogado.id}};
         }
         else {
             type = "put";
-            dados = {id: id, numero: numero, validade: validade, tiposangue: {id: tiposangue}, tipobolsa: {id: tipobolsa}, hospital: {id: 1}};
+            dados = {id: id, numero: numero, validade: validade, tiposangue: {id: tiposangue}, tipobolsa: {id: tipobolsa}, hospital: {id: usuarioLogado.id}};
         }
         
         var jsonDados = $.toJSON(dados);
@@ -198,8 +217,43 @@ $(document).ready(function() {
         });
     });
     
+    //Remove bolsa
+    $("#btnExcluir").click(function(e) {
+        
+        var id = $("#remove-id").val();
+        
+        //Ajax remove paciente        
+        var ajaxRemoveBolsa = $.ajax({
+            url: "./api/bolsadesangue/" + id,
+            type: "delete"
+        });
+        
+        ajaxRemoveBolsa.done(function(data, textStatus, jqXHR) {
+            
+            var alert = '';
+            alert += '<div id="msg" class="alert alert-success fade in">';
+            alert += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+            alert += '<strong>Sucesso!</strong> A bolsa de sangue foi removida com sucesso.';
+            alert += '</div>';
+            $("#messages").append(alert);
+
+            $("#modalRemoveBolsa").modal('hide');
+            $("#msg").alert();
+            window.setTimeout(function() {
+                $("#msg").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove(); 
+                });
+            }, 5000);
+            carregaGrid();
+        });
+
+        ajaxRemoveBolsa.fail(function(data, textStatus, jqXHR) {
+            console.log(data, textStatus, jqXHR);
+            console.log("Falha");
+        });
+    });
+    
     //Executa scripts
-    validaUsuario();
     carregaGrid();
     carregaTipoSangue();
     carregaTipoBolsa();

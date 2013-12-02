@@ -12,7 +12,6 @@ $(document).ready(function() {
 
         login.done(function(data, textStatus, jqXHR) {            
             var jsonDados = $.toJSON(data);
-            console.log(jsonDados);
             gerarCookie('hospital', jsonDados);
             window.location = "./principal.html";
         });
