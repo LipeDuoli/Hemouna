@@ -36,7 +36,7 @@ public class HospitalDao implements IDao {
             transaction.rollback();
             return false;
         } finally {
-            this.session.flush();
+            
             this.session.close();
         }
     }
@@ -53,7 +53,7 @@ public class HospitalDao implements IDao {
             transaction.rollback();
             return false;
         } finally {
-            this.session.flush();
+            
             this.session.close();
         }
     }
@@ -69,7 +69,7 @@ public class HospitalDao implements IDao {
             transaction.rollback();
             return false;
         } finally {
-            this.session.flush();
+            
             session.close();
         }
     }
@@ -85,7 +85,7 @@ public class HospitalDao implements IDao {
         } catch (HibernateException he) {
             return null;
         } finally {
-            this.session.flush();
+            
             session.close();
         }
     }
@@ -101,7 +101,7 @@ public class HospitalDao implements IDao {
         } catch (HibernateException he) {
             return null;
         } finally {
-            this.session.flush();
+            
             session.close();
         }
     }
@@ -116,7 +116,7 @@ public class HospitalDao implements IDao {
         } catch (HibernateException he) {
             return null;
         } finally {
-            this.session.flush();
+            
             session.close();
         }
     }

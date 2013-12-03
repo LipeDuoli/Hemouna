@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hemounadb</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">123456</property>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.format_sql">true</property>
-    <mapping class="com.hemouna.entidade.Bolsadesangue"/>
-    <mapping class="com.hemouna.entidade.Tiposangue"/>
-    <mapping class="com.hemouna.entidade.Paciente"/>
-    <mapping class="com.hemouna.entidade.Tipobolsa"/>
-    <mapping class="com.hemouna.entidade.Hospital"/>
-  </session-factory>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hemounadb</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">123456</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="hibernate.cache.use_query_cache">false</property>
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <mapping class="com.hemouna.entidade.Bolsadesangue"/>
+        <mapping class="com.hemouna.entidade.Tiposangue"/>
+        <mapping class="com.hemouna.entidade.Paciente"/>
+        <mapping class="com.hemouna.entidade.Tipobolsa"/>
+        <mapping class="com.hemouna.entidade.Hospital"/>
+    </session-factory>
 </hibernate-configuration>
