@@ -37,6 +37,7 @@ public class PacienteDao implements IDao {
             transaction.rollback();
             return false;
         } finally {
+            this.session.flush();
             this.session.close();
         }
     }
@@ -53,6 +54,7 @@ public class PacienteDao implements IDao {
             transaction.rollback();
             return false;
         } finally {
+            this.session.flush();
             this.session.close();
         }
     }
@@ -69,6 +71,7 @@ public class PacienteDao implements IDao {
             transaction.rollback();
             return false;
         } finally {
+            this.session.flush();
             session.close();
         }
     }
@@ -84,6 +87,7 @@ public class PacienteDao implements IDao {
         } catch (HibernateException he) {
             return null;
         } finally {
+            this.session.flush();
             session.close();
         }
     }
@@ -99,6 +103,7 @@ public class PacienteDao implements IDao {
         } catch (HibernateException he) {
             return null;
         } finally {
+            this.session.flush();
             session.close();
         }
     }
@@ -113,6 +118,7 @@ public class PacienteDao implements IDao {
         } catch (HibernateException he) {
             return null;
         } finally {
+            this.session.flush();
             session.close();
         }
     }
@@ -128,13 +134,14 @@ public class PacienteDao implements IDao {
             if (tiposangue != 0) {
                 criteria.add(Restrictions.eq("tiposangue.id", tiposangue));
             }
-            if(hospital != 0){
+            if (hospital != 0) {
                 criteria.add(Restrictions.eq("hospital.id", hospital));
             }
             return criteria.list();
         } catch (HibernateException he) {
             return null;
         } finally {
+            this.session.flush();
             session.close();
         }
     }
