@@ -57,8 +57,11 @@ public class RestBolsaDeSangue {
         try {
             Bolsadesangue b = new Gson().fromJson(bolsa_str, Bolsadesangue.class);
             BolsaDeSangueDao bDao = new BolsaDeSangueDao();
-            bDao.alterar(b);
-            return Response.status(Response.Status.CREATED).build();
+            if (bDao.alterar(b) == true) {
+                return Response.status(Response.Status.OK).build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }

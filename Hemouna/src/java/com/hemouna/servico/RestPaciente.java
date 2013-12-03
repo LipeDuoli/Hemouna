@@ -57,8 +57,12 @@ public class RestPaciente {
         try {
             Paciente p = new Gson().fromJson(paciente_str, Paciente.class);
             PacienteDao pDao = new PacienteDao();
-            pDao.alterar(p);
-            return Response.status(Response.Status.CREATED).build();
+            if (pDao.alterar(p) == true) {
+                return Response.status(Response.Status.OK).build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
