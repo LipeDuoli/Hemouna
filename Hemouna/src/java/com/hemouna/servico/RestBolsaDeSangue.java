@@ -99,7 +99,7 @@ public class RestBolsaDeSangue {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/q")
-    public Response query(@QueryParam("numero") int numero, @QueryParam("tiposangue") int tiposangue, @QueryParam("tipobolsa") int tipobolsa, @QueryParam("hospital") int hospital, @QueryParam("tipo") String tipo) {
+    public Response query(@QueryParam("numero") String numero, @QueryParam("tiposangue") int tiposangue, @QueryParam("tipobolsa") int tipobolsa, @QueryParam("hospital") int hospital, @QueryParam("tipo") String tipo) {
         try {
             String json = new Gson().toJson(new BolsaDeSangueDao().query(numero, tiposangue, tipobolsa, hospital, tipo));
             return Response.status(Response.Status.OK).entity(json).build();
