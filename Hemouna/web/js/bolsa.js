@@ -7,14 +7,26 @@ $(document).ready(function() {
     
     $("#lblUsuario").text(usuarioLogado.nomehosp);
     
-    function carregaGrid() {
+    function carregaGrid(query) {
+        
+        var url;
         
         var grid = $("#grid");
         grid.empty();
         
+        if(query === null) {
+            url = "./api/bolsadesangue/q?hospital=" + usuarioLogado.id;
+        }
+        else if(query == "") {
+            url = "./api/bolsadesangue/q?hospital=" + usuarioLogado.id;
+        }
+        else {
+            url = "./api/bolsadesangue/q?hospital=" + usuarioLogado.id + "&numero=" + query;
+        }
+        
         //Ajax bolsa
         var ajaxBolsa = $.ajax({
-            url: "./api/bolsadesangue/q?hospital=" + usuarioLogado.id,
+            url: url,
             dataType: "json"
         });    
 
@@ -232,6 +244,23 @@ $(document).ready(function() {
             type: type,
             data: jsonDados,
             statusCode: {
+                200: function() {
+                    var alert = '';
+                    alert += '<div id="msg" class="alert alert-success fade in">';
+                    alert += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+                    alert += '<strong>Sucesso!</strong> Os dados do bolsa foram salvos com sucesso.';
+                    alert += '</div>';
+                    $("#messages").append(alert);
+                    
+                    $("#modalFormBolsa").modal('hide');
+                    $("#msg").alert();
+                    window.setTimeout(function() {
+                        $("#msg").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove(); 
+                        });
+                    }, 5000);
+                    carregaGrid(null);
+                },
                 201: function() {
                     var alert = '';
                     alert += '<div id="msg" class="alert alert-success fade in">';
@@ -247,7 +276,7 @@ $(document).ready(function() {
                             $(this).remove(); 
                         });
                     }, 5000);
-                    carregaGrid();
+                    carregaGrid(null);
                 }
             }
         });
@@ -280,7 +309,7 @@ $(document).ready(function() {
                     $(this).remove(); 
                 });
             }, 5000);
-            carregaGrid();
+            carregaGrid(null);
         });
 
         ajaxRemoveBolsa.fail(function(data, textStatus, jqXHR) {
@@ -289,8 +318,17 @@ $(document).ready(function() {
         });
     });
     
+    //Pesquisa Bolsa
+    $("#btnPesquisaBolsa").click(function(e) {
+        
+        e.preventDefault();
+        
+        var query = $("#txtPesquisaBolsa").val();
+        carregaGrid(query);
+    });
+    
     //Executa scripts
-    carregaGrid();
+    carregaGrid(null);
     carregaTipoSangue();
     carregaTipoBolsa();
 });

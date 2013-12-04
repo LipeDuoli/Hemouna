@@ -7,16 +7,25 @@ $(document).ready(function() {
     
     $("#lblUsuario").text(usuarioLogado.nomehosp);
     
-    function carregaGrid() {
+    function carregaGrid(query) {
+        
+        var url;
         
         var grid = $("#grid");
         grid.empty();
         
+        if(query === null) {
+            url = "./api/paciente/q?hospital=" + usuarioLogado.id;
+        }
+        else {
+            url = "./api/paciente/q?hospital=" + usuarioLogado.id + "&nome=" + query;
+        }
+        
         //Ajax paciente
         var ajaxPaciente = $.ajax({
-            url: "./api/paciente/q?hospital=" + usuarioLogado.id,
+            url: url,
             dataType: "json"
-        });    
+        });
 
         ajaxPaciente.done(function(data, textStatus, jqXHR) {
             //console.log(data, textStatus, jqXHR);
@@ -250,7 +259,7 @@ $(document).ready(function() {
                                     $(this).remove(); 
                                 });
                             }, 5000);
-                            carregaGrid();
+                            carregaGrid(null);
                         },
                         201: function() {
                             var alert = '';
@@ -267,7 +276,7 @@ $(document).ready(function() {
                                     $(this).remove(); 
                                 });
                             }, 5000);
-                            carregaGrid();
+                            carregaGrid(null);
                         }
                     }
                 });
@@ -365,7 +374,7 @@ $(document).ready(function() {
                             $(this).remove(); 
                         });
                     }, 5000);
-                    carregaGrid();
+                    carregaGrid(null);
                 },
                 201: function() {
                     var alert = '';
@@ -382,7 +391,7 @@ $(document).ready(function() {
                             $(this).remove(); 
                         });
                     }, 5000);
-                    carregaGrid();
+                    carregaGrid(null);
                 }
             }
         });
@@ -415,7 +424,7 @@ $(document).ready(function() {
                     $(this).remove(); 
                 });
             }, 5000);
-            carregaGrid();
+            carregaGrid(null);
         });
 
         ajaxRemovePaciente.fail(function(data, textStatus, jqXHR) {
@@ -436,7 +445,7 @@ $(document).ready(function() {
                     $(this).remove(); 
                 });
             }, 5000);
-            carregaGrid();
+            carregaGrid(null);
         });
     });
     
@@ -506,7 +515,7 @@ $(document).ready(function() {
                                 $(this).remove(); 
                             });
                         }, 5000);
-                        carregaGrid();
+                        carregaGrid(null);
                     },
                     201: function() {
                         var alert = '';
@@ -524,7 +533,7 @@ $(document).ready(function() {
                                 $(this).remove(); 
                             });
                         }, 5000);
-                        carregaGrid();
+                        carregaGrid(null);
                     }
                 }
             });
@@ -535,7 +544,15 @@ $(document).ready(function() {
         });
     });
     
+    $("#btnPesquisaPaciente").click(function(e) {
+        
+        e.preventDefault();
+        
+        var query = $("#txtPesquisaPaciente").val();
+        carregaGrid(query);
+    });
+    
     //Executa scripts
-    carregaGrid();
+    carregaGrid(null);
     carregaTipoSangue();
 });
