@@ -9,12 +9,17 @@
 
 <link href="./css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
 <link href="./css/default.css" rel="stylesheet" type="text/css" >
+<link href="./css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" >
+<link href="./css/bootstrap-modal.css" rel="stylesheet" type="text/css" >
+
 
 <script type="text/javascript" src="./js/validaUsuario.js"></script>
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/jquery.json.js"></script>
 <script type="text/javascript" src="./js/bootstrap.js"></script>
 <script type="text/javascript" src="./js/paciente.js"></script>
+<script type="text/javascript" src="./js/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="./js/bootstrap-modal.js"></script>
 
 </head>
 <body>    
@@ -76,81 +81,104 @@
                             <div id="grid" class="well table-responsive" style="padding: 10px; background: white;"></div>
                             
                             <!-- Modal Form Paciente -->
-                            <div class="modal fade" id="modalFormPaciente">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form class="form-horizontal" id="formPaciente">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Paciente</h4>
+                            <div class="modal fade" id="modalFormPaciente" data-width="800">
+                                <form class="form-horizontal" id="formPaciente">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Paciente</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id" id="id">
+                                        <div class="form-group">                                                    
+                                            <label for="nome" class="col-sm-3 control-label">Nome</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="nome" id="nome">
                                             </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="id" id="id">
-                                                <div class="form-group">                                                    
-                                                    <label for="nome" class="col-sm-3 control-label">Nome</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="nome" id="nome">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">                                                    
-                                                    <label for="cpf" class="col-sm-3 control-label">CPF</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">                                                    
-                                                    <label for="tiposangue" class="col-sm-3 control-label">Tipo Sanguíneo</label>
-                                                    <div class="col-sm-9">
-                                                        <select id="tiposangue" class="form-control" name="tiposangue">
-                                                        </select>
-                                                    </div>                                                    
-                                                </div>
-                                                <div id="divBolsasAssociadas" style="display: none;">
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button class="btn btn-default" id="btnAssociaBolsa"><span class="glyphicon glyphicon-plus"></span>&nbsp;Associar Bolsa</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12" style="margin-top: 20px;">
-                                                            <div id="gridBolsasAssociadas" class="well table-responsive" style="padding: 10px; background: white;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>                                                                                              
-                                            </div>                                            
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                                        </div>
+                                        <div class="form-group">                                                    
+                                            <label for="cpf" class="col-sm-3 control-label">CPF</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11">
                                             </div>
-                                        </form>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="form-group">                                                    
+                                            <label for="tiposangue" class="col-sm-3 control-label">Tipo Sanguíneo</label>
+                                            <div class="col-sm-9">
+                                                <select id="tiposangue" class="form-control" name="tiposangue">
+                                                </select>
+                                            </div>                                                    
+                                        </div>
+                                        <div id="divBolsasAssociadas" style="display: none;">
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-default" id="btnAssociaBolsa" data-toggle="modal" href="#modalListaBolsas"><span class="glyphicon glyphicon-plus"></span>&nbsp;Associar Bolsa</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="margin-top: 20px;">
+                                                    <div id="gridListaBolsasAssociadas" class="well table-responsive" style="padding: 10px; background: white;"></div>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                              
+                                    </div>                                            
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                                    </div>
+                                </form>
                             </div><!-- /.modal -->
                             <!-- / Modal Form Paciente -->
                             
+                            <!-- Modal Lista Bolsas -->
+                            <div class="modal fade" id="modalListaBolsas" data-width="760">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Bolsas de Sangue</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="gridListaBolsas"></div>
+                                </div>
+                            </div><!-- /.modal -->
+                            <!-- / Modal Lista Bolsas -->
+                            
                             <!-- Modal Remove Paciente -->
                             <div class="modal fade" id="modalRemovePaciente">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form id="formRemovePaciente">
-                                            <input type="hidden" name="remove-id" id="remove-id">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Remover Paciente</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Tem certeza que deseja remover o paciente?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                                                <button type="button" class="btn btn-primary" id="btnExcluir">Sim</button>
-                                            </div>
-                                        </form>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
+                                <form id="formRemovePaciente">
+                                    <input type="hidden" name="remove-id" id="remove-id">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Remover Paciente</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Tem certeza que deseja remover o paciente?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                        <button type="button" class="btn btn-primary" id="btnExcluir">Sim</button>
+                                    </div>
+                                </form>
                             </div><!-- /.modal -->
                             <!-- / Modal Remove Paciente -->
+                            
+                            <!-- Modal Desassocia bolsa -->
+                            <div class="modal fade" id="modalDesassociaBolsa">
+                                <form id="formDesassociaBolsa">
+                                    <input type="hidden" name="desassocia-id" id="desassocia-id">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Desassociar Bolsa</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Tem certeza que deseja desassociar a bolsa do paciente?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                        <button type="button" class="btn btn-primary" id="btnDesassociaBolsa">Sim</button>
+                                    </div>
+                                </form>
+                            </div><!-- /.modal -->
+                            <!-- / Modal Desassocia Bolsa -->
                             
                         </div>
                     </div>

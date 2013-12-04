@@ -65,7 +65,7 @@ public class Bolsadesangue implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "paciente_id", nullable = true)
     public Paciente getPaciente() {
         return this.paciente;

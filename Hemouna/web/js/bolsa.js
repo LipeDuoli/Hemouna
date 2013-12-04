@@ -71,6 +71,42 @@ $(document).ready(function() {
                     $("#validade").val(data[0].validade);
                     $("#tiposangue").val(data[0].tiposangue.id);
                     $("#tipobolsa").val(data[0].tipobolsa.id);
+                    
+                    if(data[0].paciente != undefined) {
+                        
+                        var gridPacienteBolsa = $("#gridPacienteBolsa");
+                        var divPaciente = $("#divPacienteBolsa");
+                        gridPacienteBolsa.empty();
+                        
+                        var content = '<table class="table table-hover">';
+                        content += '<thead>';
+                        content += '<tr>';
+                        content += '<th>Paciente</th>';
+                        content += '<th>CPF</th>';
+                        content += '<th>Tipo de Sangue</th>';
+                        content += '</tr>';
+                        content += '</thead>';
+                        content += '<tbody>';
+
+                        content += '<tr class="success">';
+                        content += '<td>' + data[0].paciente.nome + '</td>';
+                        content += '<td>' + data[0].paciente.cpf + '</td>';
+                        content += '<td>' + data[0].paciente.tiposangue.tiposangue + '</td>';
+                        content += '</tr>';
+
+                        content += '</tbody>';
+                        content += '</table>';
+
+                        gridPacienteBolsa.append(content);
+                        divPaciente.show();
+                    }
+                    else {
+                        var gridPacienteBolsa = $("#gridPacienteBolsa");
+                        var divPaciente = $("#divPacienteBolsa");
+                        
+                        gridPacienteBolsa.empty();
+                        divPaciente.hide();
+                    }
 
                     modal.modal({show: true});
                 });

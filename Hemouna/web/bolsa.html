@@ -9,12 +9,16 @@
 
 <link href="./css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
 <link href="./css/default.css" rel="stylesheet" type="text/css" >
+<link href="./css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" >
+<link href="./css/bootstrap-modal.css" rel="stylesheet" type="text/css" >
 
 <script type="text/javascript" src="./js/validaUsuario.js"></script>
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/jquery.json.js"></script>
 <script type="text/javascript" src="./js/bootstrap.js"></script>
 <script type="text/javascript" src="./js/bolsa.js"></script>
+<script type="text/javascript" src="./js/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="./js/bootstrap-modal.js"></script>
 
 </head>
 <body>    
@@ -76,73 +80,73 @@
                             <div id="grid" class="well table-responsive" style="padding: 10px; background: white;"></div>
                             
                             <!-- Modal Form Bolsa -->
-                            <div class="modal fade" id="modalFormBolsa">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form class="form-horizontal" id="formBolsa">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Bolsa</h4>
+                            <div class="modal fade" id="modalFormBolsa" data-width="800">
+                                <form class="form-horizontal" id="formBolsa">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Bolsa</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id" id="id">
+                                        <div class="form-group">                                                    
+                                            <label for="numero" class="col-sm-3 control-label">Nº da Bolsa</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="numero" id="numero" maxlength="15">
                                             </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="id" id="id">
-                                                <div class="form-group">                                                    
-                                                    <label for="numero" class="col-sm-3 control-label">Nº da Bolsa</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="numero" id="numero" maxlength="15">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">                                                    
-                                                    <label for="validade" class="col-sm-3 control-label">Validade</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="validade" id="validade" maxlength="10">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">                                                    
-                                                    <label for="tipobolsa" class="col-sm-3 control-label">Tipo da Bolsa</label>
-                                                    <div class="col-sm-9">
-                                                        <select id="tipobolsa" class="form-control" name="tipobolsa">
-                                                        </select>
-                                                    </div>                                                    
-                                                </div>
-                                                <div class="form-group">                                                    
-                                                    <label for="tiposangue" class="col-sm-3 control-label">Tipo Sanguíneo</label>
-                                                    <div class="col-sm-9">
-                                                        <select id="tiposangue" class="form-control" name="tiposangue">
-                                                        </select>
-                                                    </div>                                                    
+                                        </div>
+                                        <div class="form-group">                                                    
+                                            <label for="validade" class="col-sm-3 control-label">Validade</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="validade" id="validade" maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">                                                    
+                                            <label for="tipobolsa" class="col-sm-3 control-label">Tipo da Bolsa</label>
+                                            <div class="col-sm-9">
+                                                <select id="tipobolsa" class="form-control" name="tipobolsa">
+                                                </select>
+                                            </div>                                                    
+                                        </div>
+                                        <div class="form-group">                                                    
+                                            <label for="tiposangue" class="col-sm-3 control-label">Tipo Sanguíneo</label>
+                                            <div class="col-sm-9">
+                                                <select id="tiposangue" class="form-control" name="tiposangue">
+                                                </select>
+                                            </div>                                                    
+                                        </div>
+                                        <div id="divPacienteBolsa" style="display: none;">
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12" style="margin-top: 20px;">
+                                                    <div id="gridPacienteBolsa" class="well table-responsive" style="padding: 10px; background: white;"></div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" id="btnSalvar">Salvar</button>
-                                            </div>
-                                        </form>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                                    </div>
+                                </form>
                             </div><!-- /.modal -->
                             <!-- / Modal Form Bolsa -->
                             
                             <!-- Modal Remove Bolsa -->
                             <div class="modal fade" id="modalRemoveBolsa">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form id="formRemoveBolsa">
-                                            <input type="hidden" name="remove-id" id="remove-id">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Remover Bolsa</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Tem certeza que deseja remover a bolsa de sangue?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                                                <button type="button" class="btn btn-primary" id="btnExcluir">Sim</button>
-                                            </div>
-                                        </form>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
+                                <form id="formRemoveBolsa">
+                                    <input type="hidden" name="remove-id" id="remove-id">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Remover Bolsa</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Tem certeza que deseja remover a bolsa de sangue?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                        <button type="button" class="btn btn-primary" id="btnExcluir">Sim</button>
+                                    </div>
+                                </form>
                             </div><!-- /.modal -->
                             <!-- / Modal Remove Bolsa -->
                             
