@@ -65,7 +65,7 @@ public class Bolsadesangue implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "paciente_id", nullable = true)
     public Paciente getPaciente() {
         return this.paciente;
     }
