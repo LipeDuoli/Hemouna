@@ -1,6 +1,7 @@
 package com.hemouna.entidade;
 // Generated 28/10/2013 09:47:21 by Hibernate Tools 3.6.0
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,7 +65,7 @@ public class Bolsadesangue implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "paciente_id", nullable = true)
     public Paciente getPaciente() {
         return this.paciente;
