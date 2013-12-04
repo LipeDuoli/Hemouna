@@ -133,45 +133,45 @@ $(document).ready(function() {
         }
         
         //Joga dados para html
-        $("#oPosCH").html("<img src='" + retornaSrcImagem(oPosCH) + "' title='" + oPosCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#oPosCP").html("<img src='" + retornaSrcImagem(oPosCP) + "' title='" + oPosCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#oPosP").html("<img src='" + retornaSrcImagem(oPosP) + "' title='" + oPosP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#oPosC").html("<img src='" + retornaSrcImagem(oPosC) + "' title='" + oPosC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#oPosCH").html("<img src='" + retornaSrcImagem(oPosCH) + "' title='" + oPosCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oPosCH + " bolsa(s)<b>");
+        $("#oPosCP").html("<img src='" + retornaSrcImagem(oPosCP) + "' title='" + oPosCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oPosCP + " bolsa(s)<b>");
+        $("#oPosP").html("<img src='" + retornaSrcImagem(oPosP) + "' title='" + oPosP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oPosP + " bolsa(s)<b>");
+        $("#oPosC").html("<img src='" + retornaSrcImagem(oPosC) + "' title='" + oPosC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oPosC + " bolsa(s)<b>");
         
-        $("#oNegCH").html("<img src='" + retornaSrcImagem(oNegCH) + "' title='" + oNegCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#oNegCP").html("<img src='" + retornaSrcImagem(oNegCP) + "' title='" + oNegCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#oNegP").html("<img src='" + retornaSrcImagem(oNegP) + "' title='" + oNegP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#oNegC").html("<img src='" + retornaSrcImagem(oNegC) + "' title='" + oNegC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#oNegCH").html("<img src='" + retornaSrcImagem(oNegCH) + "' title='" + oNegCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oNegCH + " bolsa(s)<b>");
+        $("#oNegCP").html("<img src='" + retornaSrcImagem(oNegCP) + "' title='" + oNegCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oNegCP + " bolsa(s)<b>");
+        $("#oNegP").html("<img src='" + retornaSrcImagem(oNegP) + "' title='" + oNegP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oNegP + " bolsa(s)<b>");
+        $("#oNegC").html("<img src='" + retornaSrcImagem(oNegC) + "' title='" + oNegC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + oNegC + " bolsa(s)<b>");
         
-        $("#aPosCH").html("<img src='" + retornaSrcImagem(aPosCH) + "' title='" + aPosCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#aPosCP").html("<img src='" + retornaSrcImagem(aPosCP) + "' title='" + aPosCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#aPosP").html("<img src='" + retornaSrcImagem(aPosP) + "' title='" + aPosP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#aPosC").html("<img src='" + retornaSrcImagem(aPosC) + "' title='" + aPosC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#aPosCH").html("<img src='" + retornaSrcImagem(aPosCH) + "' title='" + aPosCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aPosCH + " bolsa(s)<b>");
+        $("#aPosCP").html("<img src='" + retornaSrcImagem(aPosCP) + "' title='" + aPosCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aPosCP + " bolsa(s)<b>");
+        $("#aPosP").html("<img src='" + retornaSrcImagem(aPosP) + "' title='" + aPosP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aPosP + " bolsa(s)<b>");
+        $("#aPosC").html("<img src='" + retornaSrcImagem(aPosC) + "' title='" + aPosC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aPosC + " bolsa(s)<b>");
         
-        $("#aNegCH").html("<img src='" + retornaSrcImagem(aNegCH) + "' title='" + aNegCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#aNegCP").html("<img src='" + retornaSrcImagem(aNegCP) + "' title='" + aNegCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#aNegP").html("<img src='" + retornaSrcImagem(aNegP) + "' title='" + aNegP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#aNegC").html("<img src='" + retornaSrcImagem(aNegC) + "' title='" + aNegC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#aNegCH").html("<img src='" + retornaSrcImagem(aNegCH) + "' title='" + aNegCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aNegCH + " bolsa(s)<b>");
+        $("#aNegCP").html("<img src='" + retornaSrcImagem(aNegCP) + "' title='" + aNegCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aNegCP + " bolsa(s)<b>");
+        $("#aNegP").html("<img src='" + retornaSrcImagem(aNegP) + "' title='" + aNegP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aNegP + " bolsa(s)<b>");
+        $("#aNegC").html("<img src='" + retornaSrcImagem(aNegC) + "' title='" + aNegC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + aNegC + " bolsa(s)<b>");
         
-        $("#bPosCH").html("<img src='" + retornaSrcImagem(bPosCH) + "' title='" + bPosCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#bPosCP").html("<img src='" + retornaSrcImagem(bPosCP) + "' title='" + bPosCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#bPosP").html("<img src='" + retornaSrcImagem(bPosP) + "' title='" + bPosP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#bPosC").html("<img src='" + retornaSrcImagem(bPosC) + "' title='" + bPosC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#bPosCH").html("<img src='" + retornaSrcImagem(bPosCH) + "' title='" + bPosCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bPosCH + " bolsa(s)<b>");
+        $("#bPosCP").html("<img src='" + retornaSrcImagem(bPosCP) + "' title='" + bPosCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bPosCP + " bolsa(s)<b>");
+        $("#bPosP").html("<img src='" + retornaSrcImagem(bPosP) + "' title='" + bPosP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bPosP + " bolsa(s)<b>");
+        $("#bPosC").html("<img src='" + retornaSrcImagem(bPosC) + "' title='" + bPosC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bPosC + " bolsa(s)<b>");
         
-        $("#bNegCH").html("<img src='" + retornaSrcImagem(bNegCH) + "' title='" + bNegCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#bNegCP").html("<img src='" + retornaSrcImagem(bNegCP) + "' title='" + bNegCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#bNegP").html("<img src='" + retornaSrcImagem(bNegP) + "' title='" + bNegP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#bNegC").html("<img src='" + retornaSrcImagem(bNegC) + "' title='" + bNegC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#bNegCH").html("<img src='" + retornaSrcImagem(bNegCH) + "' title='" + bNegCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bNegCH + " bolsa(s)<b>");
+        $("#bNegCP").html("<img src='" + retornaSrcImagem(bNegCP) + "' title='" + bNegCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bNegCP + " bolsa(s)<b>");
+        $("#bNegP").html("<img src='" + retornaSrcImagem(bNegP) + "' title='" + bNegP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bNegP + " bolsa(s)<b>");
+        $("#bNegC").html("<img src='" + retornaSrcImagem(bNegC) + "' title='" + bNegC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + bNegC + " bolsa(s)<b>");
         
-        $("#abPosCH").html("<img src='" + retornaSrcImagem(abPosCH) + "' title='" + abPosCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#abPosCP").html("<img src='" + retornaSrcImagem(abPosCP) + "' title='" + abPosCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#abPosP").html("<img src='" + retornaSrcImagem(abPosP) + "' title='" + abPosP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#abPosC").html("<img src='" + retornaSrcImagem(abPosC) + "' title='" + abPosC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#abPosCH").html("<img src='" + retornaSrcImagem(abPosCH) + "' title='" + abPosCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abPosCH + " bolsa(s)<b>");
+        $("#abPosCP").html("<img src='" + retornaSrcImagem(abPosCP) + "' title='" + abPosCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abPosCP + " bolsa(s)<b>");
+        $("#abPosP").html("<img src='" + retornaSrcImagem(abPosP) + "' title='" + abPosP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abPosP + " bolsa(s)<b>");
+        $("#abPosC").html("<img src='" + retornaSrcImagem(abPosC) + "' title='" + abPosC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abPosC + " bolsa(s)<b>");
         
-        $("#abNegCH").html("<img src='" + retornaSrcImagem(abNegCH) + "' title='" + abNegCH + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#abNegCP").html("<img src='" + retornaSrcImagem(abNegCP) + "' title='" + abNegCP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#abNegP").html("<img src='" + retornaSrcImagem(abNegP) + "' title='" + abNegP + " bolsas' style='height: 120px; width: 100px;'>");
-        $("#abNegC").html("<img src='" + retornaSrcImagem(abNegC) + "' title='" + abNegC + " bolsas' style='height: 120px; width: 100px;'>");
+        $("#abNegCH").html("<img src='" + retornaSrcImagem(abNegCH) + "' title='" + abNegCH + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abNegCH + " bolsa(s)<b>");
+        $("#abNegCP").html("<img src='" + retornaSrcImagem(abNegCP) + "' title='" + abNegCP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abNegCP + " bolsa(s)<b>");
+        $("#abNegP").html("<img src='" + retornaSrcImagem(abNegP) + "' title='" + abNegP + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abNegP + " bolsa(s)<b>");
+        $("#abNegC").html("<img src='" + retornaSrcImagem(abNegC) + "' title='" + abNegC + " bolsas' style='height: 120px; width: 100px;'><br><b>" + abNegC + " bolsa(s)<b>");
     });
     
     ajaxBolsa.fail(function(data, textStatus, jqXHR) {
